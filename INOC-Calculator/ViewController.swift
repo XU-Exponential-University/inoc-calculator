@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+//    This array was not used in caculation, just for viewing in the console:
     var numbersArray = [Double]()
     
     var currentStateOfCalculation = 0.0
@@ -173,7 +173,7 @@ class ViewController: UIViewController {
         default:
             print("error calculation")
         }
-        print("current \(currentStateOfCalculation)")
+//        print("current \(currentStateOfCalculation)")
         resultLabel.text = String(currentStateOfCalculation)
         //        fix , after clicking x and then + numberonscreen = ""
         clearText()
