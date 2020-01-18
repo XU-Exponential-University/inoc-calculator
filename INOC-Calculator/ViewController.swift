@@ -44,14 +44,8 @@ class ViewController: UIViewController {
         previousButton = UIButton()
     }
     
-    @IBAction func posOrNegativeButtonClicked(_ sender: Any){
-        if numberOnScreen.hasPrefix("-"){
-            numberOnScreen = numberOnScreen.replacingOccurrences(of: "-", with: "")
-        }
-        else {
-            numberOnScreen = "-" + numberOnScreen
-        }
-        resultLabel.text = numberOnScreen
+    @IBAction func toggleSignButtonClicked(_ sender: Any){
+        resultLabel.text = String(Double(-1) * Double(numberOnScreen)!)
     }
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
