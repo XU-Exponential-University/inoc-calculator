@@ -9,15 +9,138 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var numberOnScreen = ""
+    
+    var currentOperator = ""
+    
+    var currentNumber = ""
+    
+    var calculationString = ""
+    
+    var result = 0.0
+    
+    @IBOutlet weak var resultLabel: UILabel!
+    
+    @IBOutlet weak var decimalButton: UIButton!
+    
+    //    This clears all the calculation and resets every variable:
+    @IBAction func clearButtonClicked(_ sender: Any) {
+        
+        clearText()
+        currentNumber = ""
+        currentOperator = ""
+        resultLabel.text = "0"
+        calculationString = ""
+        
+        unblockOperatorButton()
+        previousButton = UIButton()
+    }
+    
+    @IBAction func toggleSignButtonClicked(_ sender: Any){
+        resultLabel.text = String(Double(-1) * Double(numberOnScreen)!)
+    }
+    
+    @IBAction func percentageButtonClicked(_ sender: UIButton){
+        
+        
+    }
+    
+    @IBAction func numberZeroButtonClicked(_ sender: UIButton){
+        if resultLabel.text != "0" {
+            numberOnScreen += sender.currentTitle!
+            
+            resultLabel.text = numberOnScreen
+        }
+    }
+    
+    @IBAction func decimalButtonClicked(_ sender: UIButton){
+        decimalButton.isEnabled = false
+        if numberOnScreen == "" {
+            numberOnScreen = "0."
+            resultLabel.text = numberOnScreen
+        }
+        else {
+            numberOnScreen += sender.currentTitle!
+            
+            resultLabel.text = numberOnScreen
+            unblockOperatorButton()
+        }
+    }
+    
+    //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
+    @IBAction func operatorClicked(_ sender: UIButton){
+        
+        if numberOnScreen.contains(".") == false && currentOperator != "=" {
+            numberOnScreen += ".0"
+        }
+        currentOperator = " \(sender.currentTitle!) "
+        calculationString += numberOnScreen + currentOperator
+        print(calculationString)
+       
+        clearText()
+        
+        blockOperatorButton(block: sender)
+        
+        if previousButton != UIButton() {
+            unblockOperatorButton()
+        }
+        previousButton = sender
+    }
+    
 
+    @IBAction func resultButtonClicked(_ sender: UIButton){
+        calculationString += numberOnScreen
+        currentOperator = "="
+        print(calculationString)
+        calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
+        let y = NSExpression(format:calculationString)
+        
+        result = y.expressionValue(with: nil, context: nil) as! Double
+        print(result)
+        resultLabel.text = "\(result)"
+        calculationString = "\(result)"
+        clearText()
+        unblockOperatorButton()
+    }
+    
+    //    This function is connected to the buttons of number 1 to 9 from the storyboard:
+    @IBAction func numberButtonClicked(_ sender: UIButton){
+        if currentOperator == "=" {
+            calculationString = ""
+        }
+        numberOnScreen += sender.currentTitle!
+        
+        resultLabel.text = numberOnScreen
+        unblockOperatorButton()
+    }
+    
+    //    This function clears the text on the Label and enables the decimal BUtton
+    func clearText() {
+        numberOnScreen = ""
+        decimalButton.isEnabled = true
+    }
+    
+    //    empty Button
+    var previousButton = UIButton()
+    //    This function should block operator from being executed twice unnessasarily:
+    //    Maybe we should change the background color when its blocked..?
+    func blockOperatorButton(block button: UIButton) {
+        button.isEnabled = false
+    }
+    func unblockOperatorButton() {
+        previousButton.isEnabled = true
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-       //This is another test comment to show anita how branches work
+        //This is another test comment to show anita how branches work
         //this is another another comment :D
     }
-
-
+    
+    
 }
 
