@@ -10,6 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    /*
+     UI Variables
+     */
+    
+    //this is the red top card in the UI
+    @IBOutlet weak var topCardView: UIView!
+    
+    
     var numberOnScreen = ""
     
     var currentOperator = ""
@@ -137,8 +145,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //This is another test comment to show anita how branches work
-        //this is another another comment :D
+        
+        //rounding the bottom corners of the top card view
+        topCardView.layer.cornerRadius = CGFloat(40)
+        topCardView.clipsToBounds = true
+        topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
     
     
