@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     //this is the red top card in the UI
     @IBOutlet weak var topCardView: UIView!
     
+    //this is the result Button. Outlet needed for round corners
+    @IBOutlet weak var resultButton: UIButton!
+    
     
     var numberOnScreen = ""
     
@@ -147,11 +150,16 @@ class ViewController: UIViewController {
         
         
         //rounding the bottom corners of the top card view
-        topCardView.layer.cornerRadius = CGFloat(40)
-        topCardView.clipsToBounds = true
+        topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
     }
-    
-    
 }
 
+extension UIView {
+    func roundCorners(cornerRadius: Double) {
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        self.clipsToBounds = true
+    }
+    
+}

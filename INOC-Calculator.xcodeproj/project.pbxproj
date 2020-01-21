@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261608223D6ED5600FA58DE /* inocDocumentation.swift */; };
+		C28C6E9F23D73AA90057668D /* ResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28C6E9E23D73AA90057668D /* ResultButton.swift */; };
 		C2CBF34323CF229C0089D758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34223CF229C0089D758 /* AppDelegate.swift */; };
 		C2CBF34523CF229C0089D758 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34423CF229C0089D758 /* SceneDelegate.swift */; };
 		C2CBF34723CF229C0089D758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34623CF229C0089D758 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		C261608223D6ED5600FA58DE /* inocDocumentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inocDocumentation.swift; sourceTree = "<group>"; };
+		C28C6E9E23D73AA90057668D /* ResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultButton.swift; sourceTree = "<group>"; };
 		C2CBF33F23CF229B0089D758 /* INOC-Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "INOC-Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CBF34223CF229C0089D758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2CBF34423CF229C0089D758 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				C2CBF34623CF229C0089D758 /* ViewController.swift */,
 				C2CBF34823CF229C0089D758 /* Main.storyboard */,
 				C2CBF34E23CF22AD0089D758 /* Assets.xcassets */,
+				C28C6E9E23D73AA90057668D /* ResultButton.swift */,
 				C2CBF35023CF22AD0089D758 /* LaunchScreen.storyboard */,
 				C2CBF35323CF22AD0089D758 /* Info.plist */,
 				C2CBF34B23CF229C0089D758 /* INOC_Calculator.xcdatamodeld */,
@@ -269,6 +272,7 @@
 				C2CBF34323CF229C0089D758 /* AppDelegate.swift in Sources */,
 				C2CBF34D23CF229C0089D758 /* INOC_Calculator.xcdatamodeld in Sources */,
 				C2CBF34523CF229C0089D758 /* SceneDelegate.swift in Sources */,
+				C28C6E9F23D73AA90057668D /* ResultButton.swift in Sources */,
 				C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
