@@ -201,14 +201,40 @@ class ViewController: UIViewController {
             let newValue = self.topAreaBottomContraintVal - translation.y
             if newValue > maxDraggablePointsTopArea && newValue < 0 {
                 self.topAreaBottomConstraint.constant = newValue
+                self.view.layoutIfNeeded()
             }
             
         case .ended:
-            print("ended")
+            switch topAreaState{
+            case .normal:
+                if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
+                    changeTopCardViewHeihtWithAnimation(to: maxDraggablePointsTopArea)
+                    topAreaState = .expanded
+                } else {
+                    changeTopCardViewHeihtWithAnimation(to: 0)
+                }
+                
+            case .expanded:
+                if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
+                    changeTopCardViewHeihtWithAnimation(to: 0)
+                    self.view.layoutIfNeeded()
+                    topAreaState = .normal
+                } else {
+                    changeTopCardViewHeihtWithAnimation(to: maxDraggablePointsTopArea)
+                }
+            }
         
         default:
             break
         }
+    }
+    
+    
+    func changeTopCardViewHeihtWithAnimation(to: CGFloat){
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
+            self.topAreaBottomConstraint.constant = to
+            self.view.layoutIfNeeded()
+            }).startAnimation()
     }
 }
 
