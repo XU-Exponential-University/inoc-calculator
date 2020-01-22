@@ -20,6 +20,26 @@ class ViewController: UIViewController {
     //this is the result Button. Outlet needed for round corners
     @IBOutlet weak var resultButton: UIButton!
     
+    //constraint of top area used to resize on drag
+    @IBOutlet weak var topAreaBottomConstraint: NSLayoutConstraint!
+    
+    //default value of bottomContraint of top area
+    var topAreaBottomContraintVal: CGFloat = 0.0
+    //maximum amounts of points the top card can be dragged
+    var maxDraggablePointsTopArea: CGFloat = 0.0
+    
+    
+    /*
+     Logic Variables
+     */
+    
+    //expanding states of top area
+    enum TopAreaState{
+        case normal
+        case expanded
+    }
+    
+    var topAreaState: TopAreaState = .normal
     
     var numberOnScreen = ""
     
@@ -146,13 +166,49 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the
         
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
+        //adding pan gesture recognizer to top area
+        let topAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(topAreaDragged(_:)))
+        //disabling delays of recognition
+        topAreaDrag.delaysTouchesBegan = false
+        topAreaDrag.delaysTouchesEnded = false
+        
+        self.topCardView.addGestureRecognizer(topAreaDrag)
+        
+        //calculating the amount of points the constraint is able to have max
+        print(view.frame.size.height)
+        maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.2)) * -1
+        
+        print("max draggable points. \(maxDraggablePointsTopArea)")
+        
+        
+    }
+    
+    @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
+        let translation = panRecognizer.translation(in: self.view)
+        
+        switch panRecognizer.state {
+        case .began:
+            //saving current value
+            topAreaBottomContraintVal = topAreaBottomConstraint.constant
+            
+        case .changed:
+            let newValue = self.topAreaBottomContraintVal - translation.y
+            if newValue > maxDraggablePointsTopArea && newValue < 0 {
+                self.topAreaBottomConstraint.constant = newValue
+            }
+            
+        case .ended:
+            print("ended")
+        
+        default:
+            break
+        }
     }
 }
 
@@ -162,4 +218,10 @@ extension UIView {
         self.clipsToBounds = true
     }
     
+}
+
+extension NSLayoutConstraint {
+    func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
+        return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
+    }
 }
