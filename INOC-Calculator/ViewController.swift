@@ -54,12 +54,16 @@ class ViewController: UIViewController {
      */
     
     //expanding states of top area
-    enum TopAreaState{
+    enum DrawerState{
         case normal
         case expanded
     }
     
-    var topAreaState: TopAreaState = .normal
+    //current state of the top area
+    var topAreaState: DrawerState = .normal
+    
+    //current state of the top area
+    var sideDrawerState: DrawerState = .normal
     
     var numberOnScreen = ""
     
@@ -200,12 +204,31 @@ class ViewController: UIViewController {
         
         self.topCardView.addGestureRecognizer(topAreaDrag)
         
+        //adding screen edge pan gesture recognizer to side drawer
+        let sideAreaScreenEdgeDrag = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(sideDrawerDragged(_:)))
+        //disabling delays of recognition
+        sideAreaScreenEdgeDrag.delaysTouchesBegan = false
+        sideAreaScreenEdgeDrag.delaysTouchesEnded = false
+        sideAreaScreenEdgeDrag.edges = .left
+        //adding pan gesture recognizer to side drawer
+        let sideAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(sideDrawerDragged(_:)))
+        //disabling delays of recognition
+        sideAreaDrag.delaysTouchesBegan = false
+        sideAreaDrag.delaysTouchesEnded = false
+        
+        self.view.addGestureRecognizer(sideAreaScreenEdgeDrag)
+        self.sideDrawer.addGestureRecognizer(sideAreaDrag)
+
+        
         //calculating the amount of points the constraint is able to have max
         maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.15)) * -1
         
+        //calculating the amount of points the constraint is able to have max
+        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.7) * -1
+        
     }
     
-    func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
+    @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
         let translation = panRecognizer.translation(in: self.view)
         
         switch panRecognizer.state {
@@ -250,42 +273,42 @@ class ViewController: UIViewController {
     }
     
     
-    func sideDrawerDragged(_ panRecognizer: UIPanGestureRecognizer){
+    @IBAction func sideDrawerDragged(_ panRecognizer: UIPanGestureRecognizer){
         let translation = panRecognizer.translation(in: self.view)
         
         switch panRecognizer.state {
         case .began:
             //saving current value
-            topAreaBottomContraintVal = topAreaBottomConstraint.constant
+            sideDrawerTrailingConstraintVal = sideDrawerTrailingConstraint.constant
             
         case .changed:
-            let newValue = self.topAreaBottomContraintVal - translation.y
-            if newValue > maxDraggablePointsTopArea && newValue < 0 {
-                self.topAreaBottomConstraint.constant = newValue
+            let newValue = self.sideDrawerTrailingConstraintVal - translation.x
+            if newValue > maxDraggablePointsSideDrawer && newValue < 0 {
+                self.sideDrawerTrailingConstraint.constant = newValue
                 self.view.layoutIfNeeded()
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
-                if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
-                    if panRecognizer.velocity(in: self.view).y > 1500{
-                        changeTopCardViewHeightWithBunce(to: maxDraggablePointsTopArea)
+                if self.sideDrawerTrailingConstraint.constant < maxDraggablePointsSideDrawer / 2 {
+                    if panRecognizer.velocity(in: self.view).x > 1500{
+                        changeSideDrawerWidthWithBunce(to: maxDraggablePointsSideDrawer)
                     }else {
-                        changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
-                        topAreaState = .expanded
+                        changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
+                        sideDrawerState = .expanded
                     }
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: 0)
+                    changesideDrawerWidthWithAnimation(to: 0)
                 }
                 
             case .expanded:
-                if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
+                if self.sideDrawerTrailingConstraint.constant > maxDraggablePointsSideDrawer / 2 {
                     changeTopCardViewHeightWithAnimation(to: 0)
                     self.view.layoutIfNeeded()
-                    topAreaState = .normal
+                    sideDrawerState = .normal
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                    changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
                 }
             }
             
