@@ -24,6 +24,6 @@ public class ImportantOperatorButtonMainScreen: MainScreenButton{
         self.setTitleColor(UIColor(red: 246/255.0, green: 78/255.0, blue: 78/255.0, alpha: 1.0), for: .normal)
         
         //setting correct font
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo", size: 35)!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo", size: (self.titleLabel?.font.pointSize)!)!)
     }
 }

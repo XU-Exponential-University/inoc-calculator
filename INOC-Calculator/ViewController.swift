@@ -17,8 +17,14 @@ class ViewController: UIViewController {
     //this is the red top card in the UI
     @IBOutlet weak var topCardView: UIView!
     
+    //this is the red side drawer used for further calculations
+    @IBOutlet weak var sideDrawer: UIView!
+    
     //this is the result Button. Outlet needed for round corners
     @IBOutlet weak var resultButton: UIButton!
+    
+    
+    
     
     //constraint of top area used to resize on drag
     @IBOutlet weak var topAreaBottomConstraint: NSLayoutConstraint!
@@ -27,6 +33,20 @@ class ViewController: UIViewController {
     var topAreaBottomContraintVal: CGFloat = 0.0
     //maximum amounts of points the top card can be dragged
     var maxDraggablePointsTopArea: CGFloat = 0.0
+    
+    
+    
+    
+    //constraint of side drawer used to resize
+    @IBOutlet weak var sideDrawerTrailingConstraint: NSLayoutConstraint!
+    
+    //default value of bottomContraint of top area
+    var sideDrawerTrailingConstraintVal: CGFloat = 0.0
+    //maximum amounts of points the top card can be dragged
+    var maxDraggablePointsSideDrawer: CGFloat = 0.0
+    
+    
+    
     
     
     /*
@@ -108,7 +128,7 @@ class ViewController: UIViewController {
         currentOperator = " \(sender.currentTitle!) "
         calculationString += numberOnScreen + currentOperator
         print(calculationString)
-       
+        
         clearText()
         
         blockOperatorButton(block: sender)
@@ -119,7 +139,7 @@ class ViewController: UIViewController {
         previousButton = sender
     }
     
-
+    
     @IBAction func resultButtonClicked(_ sender: UIButton){
         calculationString += numberOnScreen
         currentOperator = "="
@@ -181,15 +201,11 @@ class ViewController: UIViewController {
         self.topCardView.addGestureRecognizer(topAreaDrag)
         
         //calculating the amount of points the constraint is able to have max
-        print(view.frame.size.height)
-        maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.2)) * -1
-        
-        print("max draggable points. \(maxDraggablePointsTopArea)")
-        
+        maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.15)) * -1
         
     }
     
-    @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
+    func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
         let translation = panRecognizer.translation(in: self.view)
         
         switch panRecognizer.state {
@@ -208,34 +224,118 @@ class ViewController: UIViewController {
             switch topAreaState{
             case .normal:
                 if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
-                    changeTopCardViewHeihtWithAnimation(to: maxDraggablePointsTopArea)
-                    topAreaState = .expanded
+                    if panRecognizer.velocity(in: self.view).y > 1500{
+                        changeTopCardViewHeightWithBunce(to: maxDraggablePointsTopArea)
+                    }else {
+                        changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                        topAreaState = .expanded
+                    }
                 } else {
-                    changeTopCardViewHeihtWithAnimation(to: 0)
+                    changeTopCardViewHeightWithAnimation(to: 0)
                 }
                 
             case .expanded:
                 if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
-                    changeTopCardViewHeihtWithAnimation(to: 0)
+                    changeTopCardViewHeightWithAnimation(to: 0)
                     self.view.layoutIfNeeded()
                     topAreaState = .normal
                 } else {
-                    changeTopCardViewHeihtWithAnimation(to: maxDraggablePointsTopArea)
+                    changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
                 }
             }
-        
+            
         default:
             break
         }
     }
     
     
-    func changeTopCardViewHeihtWithAnimation(to: CGFloat){
+    func sideDrawerDragged(_ panRecognizer: UIPanGestureRecognizer){
+        let translation = panRecognizer.translation(in: self.view)
+        
+        switch panRecognizer.state {
+        case .began:
+            //saving current value
+            topAreaBottomContraintVal = topAreaBottomConstraint.constant
+            
+        case .changed:
+            let newValue = self.topAreaBottomContraintVal - translation.y
+            if newValue > maxDraggablePointsTopArea && newValue < 0 {
+                self.topAreaBottomConstraint.constant = newValue
+                self.view.layoutIfNeeded()
+            }
+            
+        case .ended:
+            switch topAreaState{
+            case .normal:
+                if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
+                    if panRecognizer.velocity(in: self.view).y > 1500{
+                        changeTopCardViewHeightWithBunce(to: maxDraggablePointsTopArea)
+                    }else {
+                        changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                        topAreaState = .expanded
+                    }
+                } else {
+                    changeTopCardViewHeightWithAnimation(to: 0)
+                }
+                
+            case .expanded:
+                if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
+                    changeTopCardViewHeightWithAnimation(to: 0)
+                    self.view.layoutIfNeeded()
+                    topAreaState = .normal
+                } else {
+                    changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                }
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    
+    func changeTopCardViewHeightWithAnimation(to: CGFloat){
         UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
             self.topAreaBottomConstraint.constant = to
             self.view.layoutIfNeeded()
-            }).startAnimation()
+        }).startAnimation()
     }
+    
+    func changesideDrawerWidthWithAnimation(to: CGFloat){
+        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
+            self.sideDrawerTrailingConstraint.constant = to
+            self.view.layoutIfNeeded()
+        }).startAnimation()
+    }
+    
+    
+    
+    
+    func changeTopCardViewHeightWithBunce(to: CGFloat){
+        UIView.animate(withDuration: 0.6, //1
+            delay: 0.0, //2
+            usingSpringWithDamping: 0.3, //3
+            initialSpringVelocity: 1, //4
+            options: UIView.AnimationOptions.curveEaseInOut, //5
+            animations: ({ //6
+                self.topAreaBottomConstraint.constant = to
+                self.view.layoutIfNeeded()
+            }), completion: nil)
+    }
+    
+    func changeSideDrawerWidthWithBunce(to: CGFloat){
+        UIView.animate(withDuration: 0.6, //1
+            delay: 0.0, //2
+            usingSpringWithDamping: 0.3, //3
+            initialSpringVelocity: 1, //4
+            options: UIView.AnimationOptions.curveEaseInOut, //5
+            animations: ({ //6
+                self.sideDrawerTrailingConstraint.constant = to
+                self.view.layoutIfNeeded()
+            }), completion: nil)
+    }
+    
 }
 
 extension UIView {
