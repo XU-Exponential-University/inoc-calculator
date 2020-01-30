@@ -8,22 +8,27 @@
 
 import UIKit
 
-public class ImportantOperatorButtonMainScreen: MainScreenButton{
+@IBDesignable public class ImportantOperatorButtonMainScreen: UIButton{
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        doStyling()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+        doStyling()
     }
     
-    override func doStyling(){
-        super.doStyling()
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        doStyling()
+    }
+    
+    func doStyling(){
 
         //setting primary color
         self.setTitleColor(UIColor(red: 246/255.0, green: 78/255.0, blue: 78/255.0, alpha: 1.0), for: .normal)
         
-        //setting correct font
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo", size: (self.titleLabel?.font.pointSize)!)!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Regular", size: 30)!)
     }
 }

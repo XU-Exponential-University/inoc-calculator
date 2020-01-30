@@ -8,19 +8,27 @@
 
 import UIKit
 
-public class OperatorButtonMainScreen: MainScreenButton{
+@IBDesignable class OperatorButtonMainScreen: UIButton{
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        doStyling()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+        doStyling()
     }
     
-    override func doStyling(){
-        super.doStyling()
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        doStyling()
+    }
+    
+    func doStyling(){
 
         //setting white color with alpha
         self.setTitleColor(UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0), for: .normal)
+        
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-ExtraLight", size: 30)!)
     }
 }

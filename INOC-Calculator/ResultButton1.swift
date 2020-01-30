@@ -2,14 +2,13 @@
 //  ResultButton.swift
 //  INOC-Calculator
 //
-//  Created by FelixP on 29.01.20.
+//  Created by FelixP on 21.01.20.
 //  Copyright © 2020 XU Exponential University. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class ResultButton: UIButton {
-
+@IBDesignable public class ResultButton: UIButton{
     override public init(frame: CGRect) {
         super.init(frame: frame)
         doStyling()
@@ -29,5 +28,4 @@ import UIKit
         
         self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Regular", size: 35)!)
     }
-
 }
