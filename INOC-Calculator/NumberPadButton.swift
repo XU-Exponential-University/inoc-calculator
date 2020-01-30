@@ -29,6 +29,6 @@ import UIKit
         //setting white color with alpha
         self.setTitleColor(UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 0.56), for: .normal)
         
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-ExtraLight", size: 30)!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-ExtraLight", size: 31.0 * CGFloat(UIScreen.main.bounds.width / 414.0))!)
     }
 }

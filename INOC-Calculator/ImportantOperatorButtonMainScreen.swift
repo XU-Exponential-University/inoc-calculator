@@ -29,6 +29,6 @@ import UIKit
         //setting primary color
         self.setTitleColor(UIColor(red: 246/255.0, green: 78/255.0, blue: 78/255.0, alpha: 1.0), for: .normal)
         
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Regular", size: 30)!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Regular", size: 31.0 * CGFloat(UIScreen.main.bounds.width / 414.0))!)
     }
 }

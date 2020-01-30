@@ -229,7 +229,7 @@ class ViewController: UIViewController {
         maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.15)) * -1
         
         //calculating the amount of points the constraint is able to have max
-        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.7) * -1
+        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.72) * -1
         
         //setting size of leading constraint for sideDrawer
         sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer

@@ -30,7 +30,7 @@ import UIKit
         //setting white color with alpha
         self.setTitleColor(UIColor(red: 32/255.0, green: 28/255.0, blue: 26/255.0, alpha: 1.0), for: .normal)
         
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Medium", size: 22)!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Medium", size: 22.0 * CGFloat(UIScreen.main.bounds.width / 414.0))!)
     }
 
 }
