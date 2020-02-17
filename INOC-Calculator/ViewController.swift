@@ -191,8 +191,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the
-        
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -207,6 +205,7 @@ class ViewController: UIViewController {
         topAreaDrag.delaysTouchesBegan = false
         topAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to top area
         self.topCardView.addGestureRecognizer(topAreaDrag)
         
         //adding screen edge pan gesture recognizer to side drawer
@@ -221,6 +220,7 @@ class ViewController: UIViewController {
         sideAreaDrag.delaysTouchesBegan = false
         sideAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to main and side view
         self.view.addGestureRecognizer(sideAreaScreenEdgeDrag)
         self.sideDrawer.addGestureRecognizer(sideAreaDrag)
         
@@ -245,46 +245,64 @@ class ViewController: UIViewController {
             topAreaBottomContraintVal = topAreaBottomConstraint.constant
             
         case .changed:
-            
             let newValue = self.topAreaBottomContraintVal - translation.y
             if newValue > maxDraggablePointsTopArea && newValue < 0 {
                 self.topAreaBottomConstraint.constant = newValue
                 self.view.layoutIfNeeded()
+                
+                //fold sideDrawer back if expanded
                 if sideDrawerState == .expanded{
-                    changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
-                    changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
-                    sideDrawerState = .normal
+                    sideDrawerToCollapsed()
                 }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //top area is in the lower half
                 if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
+                    //velocity of drag is high enough for bounce
                     if panRecognizer.velocity(in: self.view).y > 1500{
-                        changeConstraintValueWithBounce(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
-                        topAreaState = .expanded
+                        topAreaToExpanded(withBounce: true)
+                    //animate top area down without bounce, due to low velocity
                     }else {
-                        changeConstraintWithAnimation(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
-                        topAreaState = .expanded
+                        topAreaToExpanded(withBounce: false)
                     }
+                //top area has not been dragged down far enough, animate back up
                 } else {
-                    changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
-                    
+                    topAreaToCollapsed()
                 }
                 
             case .expanded:
+                //top area is in the top half when let go of drag
                 if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
-                    changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
-                    topAreaState = .normal
+                    topAreaToCollapsed()
+                //top area is in lower half when let go of drag and gets back to expanded position
                 } else {
-                    changeConstraintWithAnimation(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+                    topAreaToExpanded(withBounce: false)
                 }
             }
             
         default:
             break
         }
+    }
+    
+    //moving top area back in
+    func topAreaToCollapsed(){
+        changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
+        topAreaState = .normal
+    }
+    
+    //expanding top area with or without bounce animation
+    func topAreaToExpanded(withBounce: Bool){
+        if withBounce {
+            changeConstraintValueWithBounce(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+        }else{
+            changeConstraintWithAnimation(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+            
+        }
+        topAreaState = .expanded
     }
     
     
@@ -302,45 +320,63 @@ class ViewController: UIViewController {
                 self.sideDrawerTrailingConstraint.constant = newValue
                 self.sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer + -1 * newValue
                 self.view.layoutIfNeeded()
+                
+                //fold topArea back if extended
                 if topAreaState == .expanded{
-                    changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
-                    topAreaState = .normal
+                    topAreaToCollapsed()
                 }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //is the side area let go of whilst being in the right half of screen?
                 if self.sideDrawerTrailingConstraint.constant < maxDraggablePointsSideDrawer / 2 {
+                    //is the velocity of the drag gesture high enough for bounce animation?
                     if panRecognizer.velocity(in: self.view).x > 1000{
-                        self.sideDrawerLeadingConstraint.constant = 0
-                        self.view.layoutIfNeeded()
-                        changeConstraintValueWithBounce(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
-                        sideDrawerState = .expanded
+                        sideDrawerToExpanded(withBounce: true)
+                    //if not, just animate the side area into the expanded position without bounce
                     }else {
-                        changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
-                        changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: 0)
-                        sideDrawerState = .expanded
+                        sideDrawerToExpanded(withBounce: false)
                     }
+                //side area is not let go of in the right half, so just animate it back up
                 } else {
-                    changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
-                    changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
+                    sideDrawerToCollapsed()
                 }
                 
             case .expanded:
+                //is swiped back far enough to animate side area back to collapsed state
                 if self.sideDrawerTrailingConstraint.constant > maxDraggablePointsSideDrawer / 2 {
-                    changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
-                    changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
-                    sideDrawerState = .normal
+                    sideDrawerToCollapsed()
+                //drag is not far enough, so animate side area back out
                 } else {
-                    changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
-                    changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: 0)
+                    sideDrawerToExpanded(withBounce: false)
                 }
             }
             
         default:
             break
         }
+    }
+    
+    //animates the top area to its collapsed state
+    func sideDrawerToCollapsed(){
+        changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
+        changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
+        sideDrawerState = .normal
+    }
+    
+    //expands the top area eventually with a bounce
+    func sideDrawerToExpanded(withBounce: Bool){
+        if withBounce{
+            self.sideDrawerLeadingConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            changeConstraintValueWithBounce(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+        }else{
+            changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+            changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: 0)
+        }
+        sideDrawerState = .expanded
     }
     
     
