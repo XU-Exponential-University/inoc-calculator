@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261608223D6ED5600FA58DE /* inocDocumentation.swift */; };
+		C28C6E9F23D73AA90057668D /* ResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28C6E9E23D73AA90057668D /* ResultButton.swift */; };
+		C28C6EA523D74F260057668D /* MainScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28C6EA423D74F260057668D /* MainScreenButton.swift */; };
+		C28C6EBB23D7535D0057668D /* Exo-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EA923D7535B0057668D /* Exo-ExtraLightItalic.ttf */; };
+		C28C6EBC23D7535D0057668D /* Exo-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAA23D7535B0057668D /* Exo-LightItalic.ttf */; };
+		C28C6EBD23D7535D0057668D /* Exo-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAB23D7535B0057668D /* Exo-ExtraBold.ttf */; };
+		C28C6EBE23D7535D0057668D /* Exo-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAC23D7535B0057668D /* Exo-BlackItalic.ttf */; };
+		C28C6EBF23D7535D0057668D /* Exo-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAD23D7535B0057668D /* Exo-SemiBold.ttf */; };
+		C28C6EC023D7535D0057668D /* Exo-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAE23D7535B0057668D /* Exo-Black.ttf */; };
+		C28C6EC123D7535D0057668D /* Exo-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAF23D7535C0057668D /* Exo-Light.ttf */; };
+		C28C6EC223D7535D0057668D /* Exo-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB023D7535C0057668D /* Exo-ThinItalic.ttf */; };
+		C28C6EC323D7535D0057668D /* Exo-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB123D7535C0057668D /* Exo-Bold.ttf */; };
+		C28C6EC423D7535D0057668D /* Exo-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB223D7535C0057668D /* Exo-Thin.ttf */; };
+		C28C6EC523D7535D0057668D /* Exo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB323D7535C0057668D /* Exo-Regular.ttf */; };
+		C28C6EC623D7535D0057668D /* Exo-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB423D7535C0057668D /* Exo-MediumItalic.ttf */; };
+		C28C6EC723D7535D0057668D /* Exo-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB523D7535C0057668D /* Exo-BoldItalic.ttf */; };
+		C28C6EC823D7535D0057668D /* Exo-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB623D7535C0057668D /* Exo-ExtraBoldItalic.ttf */; };
+		C28C6EC923D7535D0057668D /* Exo-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB723D7535D0057668D /* Exo-ExtraLight.ttf */; };
+		C28C6ECA23D7535D0057668D /* Exo-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB823D7535D0057668D /* Exo-Italic.ttf */; };
+		C28C6ECB23D7535D0057668D /* Exo-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EB923D7535D0057668D /* Exo-Medium.ttf */; };
+		C28C6ECC23D7535D0057668D /* Exo-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EBA23D7535D0057668D /* Exo-SemiBoldItalic.ttf */; };
+		C28C6ECE23D755700057668D /* NumberPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28C6ECD23D755700057668D /* NumberPadButton.swift */; };
 		C2CBF34323CF229C0089D758 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34223CF229C0089D758 /* AppDelegate.swift */; };
 		C2CBF34523CF229C0089D758 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34423CF229C0089D758 /* SceneDelegate.swift */; };
 		C2CBF34723CF229C0089D758 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF34623CF229C0089D758 /* ViewController.swift */; };
@@ -16,6 +38,8 @@
 		C2CBF35223CF22AD0089D758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2CBF35023CF22AD0089D758 /* LaunchScreen.storyboard */; };
 		C2CBF35D23CF22AD0089D758 /* INOC_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF35C23CF22AD0089D758 /* INOC_CalculatorTests.swift */; };
 		C2CBF36823CF22AD0089D758 /* INOC_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF36723CF22AD0089D758 /* INOC_CalculatorUITests.swift */; };
+		C2F7011D23D86393000809EB /* ImportantOperatorButtonMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F7011C23D86393000809EB /* ImportantOperatorButtonMainScreen.swift */; };
+		C2F7012123D864C0000809EB /* OperatorButtonMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F7012023D864C0000809EB /* OperatorButtonMainScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +60,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C261608223D6ED5600FA58DE /* inocDocumentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inocDocumentation.swift; sourceTree = "<group>"; };
+		C28C6E9E23D73AA90057668D /* ResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultButton.swift; sourceTree = "<group>"; };
+		C28C6EA423D74F260057668D /* MainScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainScreenButton.swift; path = ../MainScreenButton.swift; sourceTree = "<group>"; };
+		C28C6EA923D7535B0057668D /* Exo-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EAA23D7535B0057668D /* Exo-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-LightItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EAB23D7535B0057668D /* Exo-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraBold.ttf"; sourceTree = "<group>"; };
+		C28C6EAC23D7535B0057668D /* Exo-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EAD23D7535B0057668D /* Exo-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.ttf"; sourceTree = "<group>"; };
+		C28C6EAE23D7535B0057668D /* Exo-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Black.ttf"; sourceTree = "<group>"; };
+		C28C6EAF23D7535C0057668D /* Exo-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Light.ttf"; sourceTree = "<group>"; };
+		C28C6EB023D7535C0057668D /* Exo-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ThinItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EB123D7535C0057668D /* Exo-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Bold.ttf"; sourceTree = "<group>"; };
+		C28C6EB223D7535C0057668D /* Exo-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Thin.ttf"; sourceTree = "<group>"; };
+		C28C6EB323D7535C0057668D /* Exo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.ttf"; sourceTree = "<group>"; };
+		C28C6EB423D7535C0057668D /* Exo-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EB523D7535C0057668D /* Exo-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EB623D7535C0057668D /* Exo-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		C28C6EB723D7535D0057668D /* Exo-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraLight.ttf"; sourceTree = "<group>"; };
+		C28C6EB823D7535D0057668D /* Exo-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Italic.ttf"; sourceTree = "<group>"; };
+		C28C6EB923D7535D0057668D /* Exo-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Medium.ttf"; sourceTree = "<group>"; };
+		C28C6EBA23D7535D0057668D /* Exo-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		C28C6ECD23D755700057668D /* NumberPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadButton.swift; sourceTree = "<group>"; };
 		C2CBF33F23CF229B0089D758 /* INOC-Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "INOC-Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CBF34223CF229C0089D758 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2CBF34423CF229C0089D758 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +97,8 @@
 		C2CBF36323CF22AD0089D758 /* INOC-CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "INOC-CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CBF36723CF22AD0089D758 /* INOC_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INOC_CalculatorUITests.swift; sourceTree = "<group>"; };
 		C2CBF36923CF22AD0089D758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2F7011C23D86393000809EB /* ImportantOperatorButtonMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantOperatorButtonMainScreen.swift; sourceTree = "<group>"; };
+		C2F7012023D864C0000809EB /* OperatorButtonMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorButtonMainScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +126,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C28C6EA823D753390057668D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				C28C6EAE23D7535B0057668D /* Exo-Black.ttf */,
+				C28C6EAC23D7535B0057668D /* Exo-BlackItalic.ttf */,
+				C28C6EB123D7535C0057668D /* Exo-Bold.ttf */,
+				C28C6EB523D7535C0057668D /* Exo-BoldItalic.ttf */,
+				C28C6EAB23D7535B0057668D /* Exo-ExtraBold.ttf */,
+				C28C6EB623D7535C0057668D /* Exo-ExtraBoldItalic.ttf */,
+				C28C6EB723D7535D0057668D /* Exo-ExtraLight.ttf */,
+				C28C6EA923D7535B0057668D /* Exo-ExtraLightItalic.ttf */,
+				C28C6EB823D7535D0057668D /* Exo-Italic.ttf */,
+				C28C6EAF23D7535C0057668D /* Exo-Light.ttf */,
+				C28C6EAA23D7535B0057668D /* Exo-LightItalic.ttf */,
+				C28C6EB923D7535D0057668D /* Exo-Medium.ttf */,
+				C28C6EB423D7535C0057668D /* Exo-MediumItalic.ttf */,
+				C28C6EB323D7535C0057668D /* Exo-Regular.ttf */,
+				C28C6EAD23D7535B0057668D /* Exo-SemiBold.ttf */,
+				C28C6EBA23D7535D0057668D /* Exo-SemiBoldItalic.ttf */,
+				C28C6EB223D7535C0057668D /* Exo-Thin.ttf */,
+				C28C6EB023D7535C0057668D /* Exo-ThinItalic.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		C2CBF33623CF229B0089D758 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +174,12 @@
 		C2CBF34123CF229B0089D758 /* INOC-Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				C28C6EA823D753390057668D /* Font */,
+				C28C6EA423D74F260057668D /* MainScreenButton.swift */,
+				C28C6E9E23D73AA90057668D /* ResultButton.swift */,
+				C2F7011C23D86393000809EB /* ImportantOperatorButtonMainScreen.swift */,
+				C28C6ECD23D755700057668D /* NumberPadButton.swift */,
+				C2F7012023D864C0000809EB /* OperatorButtonMainScreen.swift */,
 				C2CBF34223CF229C0089D758 /* AppDelegate.swift */,
 				C2CBF34423CF229C0089D758 /* SceneDelegate.swift */,
 				C2CBF34623CF229C0089D758 /* ViewController.swift */,
@@ -109,6 +188,7 @@
 				C2CBF35023CF22AD0089D758 /* LaunchScreen.storyboard */,
 				C2CBF35323CF22AD0089D758 /* Info.plist */,
 				C2CBF34B23CF229C0089D758 /* INOC_Calculator.xcdatamodeld */,
+				C261608223D6ED5600FA58DE /* inocDocumentation.swift */,
 			);
 			path = "INOC-Calculator";
 			sourceTree = "<group>";
@@ -235,9 +315,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C28C6ECB23D7535D0057668D /* Exo-Medium.ttf in Resources */,
+				C28C6EC423D7535D0057668D /* Exo-Thin.ttf in Resources */,
+				C28C6EC623D7535D0057668D /* Exo-MediumItalic.ttf in Resources */,
+				C28C6EBE23D7535D0057668D /* Exo-BlackItalic.ttf in Resources */,
 				C2CBF35223CF22AD0089D758 /* LaunchScreen.storyboard in Resources */,
+				C28C6EC823D7535D0057668D /* Exo-ExtraBoldItalic.ttf in Resources */,
+				C28C6EC923D7535D0057668D /* Exo-ExtraLight.ttf in Resources */,
+				C28C6EBC23D7535D0057668D /* Exo-LightItalic.ttf in Resources */,
+				C28C6EC523D7535D0057668D /* Exo-Regular.ttf in Resources */,
 				C2CBF34F23CF22AD0089D758 /* Assets.xcassets in Resources */,
+				C28C6EBF23D7535D0057668D /* Exo-SemiBold.ttf in Resources */,
+				C28C6EBD23D7535D0057668D /* Exo-ExtraBold.ttf in Resources */,
+				C28C6EC323D7535D0057668D /* Exo-Bold.ttf in Resources */,
+				C28C6EC223D7535D0057668D /* Exo-ThinItalic.ttf in Resources */,
 				C2CBF34A23CF229C0089D758 /* Main.storyboard in Resources */,
+				C28C6EC023D7535D0057668D /* Exo-Black.ttf in Resources */,
+				C28C6EC123D7535D0057668D /* Exo-Light.ttf in Resources */,
+				C28C6ECA23D7535D0057668D /* Exo-Italic.ttf in Resources */,
+				C28C6EC723D7535D0057668D /* Exo-BoldItalic.ttf in Resources */,
+				C28C6ECC23D7535D0057668D /* Exo-SemiBoldItalic.ttf in Resources */,
+				C28C6EBB23D7535D0057668D /* Exo-ExtraLightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,10 +360,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F7012123D864C0000809EB /* OperatorButtonMainScreen.swift in Sources */,
+				C2F7011D23D86393000809EB /* ImportantOperatorButtonMainScreen.swift in Sources */,
 				C2CBF34723CF229C0089D758 /* ViewController.swift in Sources */,
 				C2CBF34323CF229C0089D758 /* AppDelegate.swift in Sources */,
+				C28C6ECE23D755700057668D /* NumberPadButton.swift in Sources */,
 				C2CBF34D23CF229C0089D758 /* INOC_Calculator.xcdatamodeld in Sources */,
 				C2CBF34523CF229C0089D758 /* SceneDelegate.swift in Sources */,
+				C28C6E9F23D73AA90057668D /* ResultButton.swift in Sources */,
+				C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */,
+				C28C6EA523D74F260057668D /* MainScreenButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

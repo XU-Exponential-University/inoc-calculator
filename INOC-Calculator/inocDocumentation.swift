@@ -1,3 +1,4 @@
+/*
 //This document shows all variables and functions that are used in the project.
 
 /*
@@ -225,3 +226,4 @@ fun getFraction(denominator: Double, numerator: Double) -> Double{
     Returns a fraction after dividing the numerator by the denominator.
     */
 }
+*/
