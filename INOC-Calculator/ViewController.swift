@@ -36,7 +36,6 @@ class ViewController: UIViewController {
     
     
     
-    
     //constraint of side drawer used to resize
     @IBOutlet weak var sideDrawerTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var sideDrawerLeadingConstraint: NSLayoutConstraint!
@@ -66,13 +65,17 @@ class ViewController: UIViewController {
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
     
-    var numberOnScreen = ""
+    var lastDigit = ""
+    
+    var lastNumber = ""
     
     var currentOperator = ""
     
     var currentNumber = ""
     
     var calculationString = ""
+    
+    var previousCalculation = ""
     
     var result = 0.0
     
@@ -84,7 +87,7 @@ class ViewController: UIViewController {
     @IBAction func clearButtonClicked(_ sender: Any) {
         
         clearText()
-        currentNumber = ""
+//        currentNumber = ""
         currentOperator = ""
         resultLabel.text = "0"
         calculationString = ""
@@ -94,7 +97,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonClicked(_ sender: Any){
-        resultLabel.text = String(Double(-1) * Double(numberOnScreen)!)
+        resultLabel.text = String(Double(-1) * Double(lastDigit)!)
     }
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
@@ -104,34 +107,46 @@ class ViewController: UIViewController {
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
         if resultLabel.text != "0" {
-            numberOnScreen += sender.currentTitle!
+            lastDigit += sender.currentTitle!
             
-            resultLabel.text = numberOnScreen
+            resultLabel.text = calculationString
         }
     }
     
     @IBAction func decimalButtonClicked(_ sender: UIButton){
         decimalButton.isEnabled = false
-        if numberOnScreen == "" {
-            numberOnScreen = "0."
-            resultLabel.text = numberOnScreen
+        if lastNumber == "" {
+            lastNumber = "0."
+            calculationString += lastNumber
+            
         }
         else {
-            numberOnScreen += sender.currentTitle!
+            lastDigit = sender.currentTitle!
             
-            resultLabel.text = numberOnScreen
+            lastNumber += lastDigit
+            calculationString += lastDigit
+            
             unblockOperatorButton()
         }
+        resultLabel.text = calculationString
     }
     
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
+        print(lastNumber)
+        print(currentOperator != "=")
         
-        if numberOnScreen.contains(".") == false && currentOperator != "=" {
-            numberOnScreen += ".0"
+        if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
+            calculationString.removeLast()
+            print("1. \(calculationString)")
         }
-        currentOperator = " \(sender.currentTitle!) "
-        calculationString += numberOnScreen + currentOperator
+        else {
+            if lastNumber.contains(".") == false && currentOperator != "=" {
+                lastNumber += ".0"
+                calculationString += ".0"
+            } }
+        currentOperator = "\(sender.currentTitle!)"
+        calculationString += currentOperator
         print(calculationString)
         
         clearText()
@@ -142,11 +157,16 @@ class ViewController: UIViewController {
             unblockOperatorButton()
         }
         previousButton = sender
+        
     }
     
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
-        calculationString += numberOnScreen
+        //        calculationString += numberOnScreen
+        if lastNumber.contains(".") == false {
+            lastNumber += ".0"
+            calculationString += ".0"
+        }
         currentOperator = "="
         print(calculationString)
         calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
@@ -154,7 +174,11 @@ class ViewController: UIViewController {
         
         result = y.expressionValue(with: nil, context: nil) as! Double
         print(result)
-        resultLabel.text = "\(result)"
+        calculationString += currentOperator
+        calculationString += "\(result)"
+        resultLabel.text = calculationString
+//        to store the calculation String for the History before it will be deleted:
+        previousCalculation = calculationString
         calculationString = "\(result)"
         clearText()
         unblockOperatorButton()
@@ -162,18 +186,27 @@ class ViewController: UIViewController {
     
     //    This function is connected to the buttons of number 1 to 9 from the storyboard:
     @IBAction func numberButtonClicked(_ sender: UIButton){
+//        currentOpertor = "" so it does not add additional .0 twice in operator function, calculationString ="" to start a new calculation
         if currentOperator == "=" {
             calculationString = ""
+            currentOperator = ""
         }
-        numberOnScreen += sender.currentTitle!
+        lastDigit = sender.currentTitle!
         
-        resultLabel.text = numberOnScreen
+        lastNumber += lastDigit
+        
+        calculationString += lastDigit
+        
+        resultLabel.text = calculationString
         unblockOperatorButton()
+        print("last digit \(lastDigit) & \(lastNumber) calculation \(calculationString)")
     }
+    
     
     //    This function clears the text on the Label and enables the decimal BUtton
     func clearText() {
-        numberOnScreen = ""
+        lastDigit = ""
+        lastNumber = ""
         decimalButton.isEnabled = true
     }
     
@@ -216,6 +249,7 @@ class ViewController: UIViewController {
         sideAreaScreenEdgeDrag.delaysTouchesBegan = false
         sideAreaScreenEdgeDrag.delaysTouchesEnded = false
         sideAreaScreenEdgeDrag.edges = .left
+        
         //adding pan gesture recognizer to side drawer
         let sideAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(sideDrawerDragged(_:)))
         //disabling delays of recognition
@@ -243,7 +277,7 @@ class ViewController: UIViewController {
         
         switch panRecognizer.state {
         case .began:
-            //saving current value
+            //saving current state of constraint
             topAreaBottomContraintVal = topAreaBottomConstraint.constant
             
         case .changed:
@@ -266,11 +300,11 @@ class ViewController: UIViewController {
                     //velocity of drag is high enough for bounce
                     if panRecognizer.velocity(in: self.view).y > 1500{
                         topAreaToExpanded(withBounce: true)
-                    //animate top area down without bounce, due to low velocity
+                        //animate top area down without bounce, due to low velocity
                     }else {
                         topAreaToExpanded(withBounce: false)
                     }
-                //top area has not been dragged down far enough, animate back up
+                    //top area has not been dragged down far enough, animate back up
                 } else {
                     topAreaToCollapsed()
                 }
@@ -279,7 +313,7 @@ class ViewController: UIViewController {
                 //top area is in the top half when let go of drag
                 if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
                     topAreaToCollapsed()
-                //top area is in lower half when let go of drag and gets back to expanded position
+                    //top area is in lower half when let go of drag and gets back to expanded position
                 } else {
                     topAreaToExpanded(withBounce: false)
                 }
@@ -337,11 +371,11 @@ class ViewController: UIViewController {
                     //is the velocity of the drag gesture high enough for bounce animation?
                     if panRecognizer.velocity(in: self.view).x > 1000{
                         sideDrawerToExpanded(withBounce: true)
-                    //if not, just animate the side area into the expanded position without bounce
+                        //if not, just animate the side area into the expanded position without bounce
                     }else {
                         sideDrawerToExpanded(withBounce: false)
                     }
-                //side area is not let go of in the right half, so just animate it back up
+                    //side area is not let go of in the right half, so just animate it back up
                 } else {
                     sideDrawerToCollapsed()
                 }
@@ -350,7 +384,7 @@ class ViewController: UIViewController {
                 //is swiped back far enough to animate side area back to collapsed state
                 if self.sideDrawerTrailingConstraint.constant > maxDraggablePointsSideDrawer / 2 {
                     sideDrawerToCollapsed()
-                //drag is not far enough, so animate side area back out
+                    //drag is not far enough, so animate side area back out
                 } else {
                     sideDrawerToExpanded(withBounce: false)
                 }
