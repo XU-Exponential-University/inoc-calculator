@@ -137,7 +137,7 @@ class ViewController: UIViewController {
         
         blockOperatorButton(block: sender)
         
-        if previousButton != UIButton() {
+        if previousButton != sender {
             unblockOperatorButton()
         }
         previousButton = sender
@@ -182,9 +182,11 @@ class ViewController: UIViewController {
     //    Maybe we should change the background color when its blocked..?
     func blockOperatorButton(block button: UIButton) {
         button.isEnabled = false
+        button.backgroundColor = #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0.2658390411)
     }
     func unblockOperatorButton() {
         previousButton.isEnabled = true
+        previousButton.backgroundColor = #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0)
     }
     
     

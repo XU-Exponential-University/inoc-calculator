@@ -31,6 +31,9 @@
                                                             <constraint firstAttribute="width" secondItem="Lql-Pp-LRo" secondAttribute="height" multiplier="1:1" id="vL4-pc-dxl"/>
                                                         </constraints>
                                                         <state key="normal" title="C"/>
+                                                        <connections>
+                                                            <action selector="clearButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QEF-Ip-RO9"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-Fu-ROJ" customClass="OperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.666666666666671"/>
@@ -39,6 +42,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                         <state key="normal" title="+/-"/>
+                                                        <connections>
+                                                            <action selector="toggleSignButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ngu-Mo-Qn7"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gd5-39-f4b" customClass="OperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.666666666666671"/>
@@ -53,6 +59,9 @@
                                                             <constraint firstAttribute="width" secondItem="6E2-TL-TMC" secondAttribute="height" multiplier="1:1" id="Uc3-Qu-pzP"/>
                                                         </constraints>
                                                         <state key="normal" title="/"/>
+                                                        <connections>
+                                                            <action selector="operatorClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sXe-9E-REB"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -65,6 +74,9 @@
                                                             <constraint firstAttribute="width" secondItem="6Nm-52-uDQ" secondAttribute="height" multiplier="1:1" id="NsS-WA-wB9"/>
                                                         </constraints>
                                                         <state key="normal" title="7"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1iW-Xr-BOq"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkl-EM-91o" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -72,6 +84,9 @@
                                                             <constraint firstAttribute="width" secondItem="wkl-EM-91o" secondAttribute="height" multiplier="1:1" id="wHJ-6G-nLR"/>
                                                         </constraints>
                                                         <state key="normal" title="8"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CaK-b7-kF6"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7u6-78-AV5" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -79,6 +94,9 @@
                                                             <constraint firstAttribute="width" secondItem="7u6-78-AV5" secondAttribute="height" multiplier="1:1" id="cuB-Fm-Kld"/>
                                                         </constraints>
                                                         <state key="normal" title="9"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xVI-Wd-xoj"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ech-3v-o2w" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -86,6 +104,9 @@
                                                             <constraint firstAttribute="width" secondItem="ech-3v-o2w" secondAttribute="height" multiplier="1:1" id="qlf-o0-yZm"/>
                                                         </constraints>
                                                         <state key="normal" title="x"/>
+                                                        <connections>
+                                                            <action selector="operatorClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fHu-wb-QUN"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -98,6 +119,9 @@
                                                             <constraint firstAttribute="width" secondItem="T0p-Zx-bFo" secondAttribute="height" multiplier="1:1" id="xgC-cg-4gs"/>
                                                         </constraints>
                                                         <state key="normal" title="4"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wdv-Eo-Ekg"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg6-vL-wLp" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -105,6 +129,9 @@
                                                             <constraint firstAttribute="width" secondItem="Bg6-vL-wLp" secondAttribute="height" multiplier="1:1" id="wY6-pu-MzW"/>
                                                         </constraints>
                                                         <state key="normal" title="5"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="meh-7g-hvU"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67F-H9-ENQ" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -112,6 +139,9 @@
                                                             <constraint firstAttribute="width" secondItem="67F-H9-ENQ" secondAttribute="height" multiplier="1:1" id="t3o-hy-iNF"/>
                                                         </constraints>
                                                         <state key="normal" title="6"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EfN-DT-JRJ"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj8-r3-3Ge" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -119,6 +149,9 @@
                                                             <constraint firstAttribute="width" secondItem="Kj8-r3-3Ge" secondAttribute="height" multiplier="1:1" id="djv-pX-SdR"/>
                                                         </constraints>
                                                         <state key="normal" title="-"/>
+                                                        <connections>
+                                                            <action selector="operatorClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X33-60-pcb"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -131,6 +164,9 @@
                                                             <constraint firstAttribute="width" secondItem="C6N-bx-8hk" secondAttribute="height" multiplier="1:1" id="pfd-Qu-877"/>
                                                         </constraints>
                                                         <state key="normal" title="1"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gwI-L5-9Em"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yat-Yd-xnB" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -138,6 +174,9 @@
                                                             <constraint firstAttribute="width" secondItem="yat-Yd-xnB" secondAttribute="height" multiplier="1:1" id="iY3-EL-KdE"/>
                                                         </constraints>
                                                         <state key="normal" title="2"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q8d-Ir-SPa"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1D-Lv-Kg6" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -145,6 +184,9 @@
                                                             <constraint firstAttribute="width" secondItem="Q1D-Lv-Kg6" secondAttribute="height" multiplier="1:1" id="7po-9e-4v0"/>
                                                         </constraints>
                                                         <state key="normal" title="3"/>
+                                                        <connections>
+                                                            <action selector="numberButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QMt-dI-aMT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teK-zN-rH4" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -152,6 +194,9 @@
                                                             <constraint firstAttribute="width" secondItem="teK-zN-rH4" secondAttribute="height" multiplier="1:1" id="hYE-vN-WkQ"/>
                                                         </constraints>
                                                         <state key="normal" title="+"/>
+                                                        <connections>
+                                                            <action selector="operatorClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sOW-S4-Nmi"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -161,10 +206,16 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTF-4E-Q7y" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="178.66666666666666" height="67.333333333333329"/>
                                                         <state key="normal" title="0"/>
+                                                        <connections>
+                                                            <action selector="numberZeroButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Yy-Ij-qpl"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBQ-zJ-ts9" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="199" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <state key="normal" title="."/>
+                                                        <connections>
+                                                            <action selector="decimalButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zNV-Kd-2pM"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hO-Kq-ICo" customClass="ResultButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
@@ -175,6 +226,9 @@
                                                         <state key="normal" title="=">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="resultButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gTz-1D-yDM"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -250,7 +304,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="decimalButton" destination="QBQ-zJ-ts9" id="UaJ-Jo-bPK"/>
                         <outlet property="resultButton" destination="2hO-Kq-ICo" id="DNv-Mi-kUi"/>
+                        <outlet property="resultLabel" destination="bNY-y9-GHj" id="qaT-3u-bFx"/>
                         <outlet property="sideDrawer" destination="9aL-eK-LDG" id="LSd-QC-Krj"/>
                         <outlet property="sideDrawerTrailingConstraint" destination="G5f-Iq-CWe" id="3zu-dG-NdO"/>
                         <outlet property="topAreaBottomConstraint" destination="y1c-EV-CWl" id="yz2-aQ-5E8"/>
