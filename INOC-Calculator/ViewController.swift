@@ -39,6 +39,7 @@ class ViewController: UIViewController {
     
     //constraint of side drawer used to resize
     @IBOutlet weak var sideDrawerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideDrawerLeadingConstraint: NSLayoutConstraint!
     
     //default value of bottomContraint of top area
     var sideDrawerTrailingConstraintVal: CGFloat = 0.0
@@ -192,11 +193,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the
-        
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        //rounding top right corner of the side drawer menu
+        sideDrawer.roundCorners(cornerRadius: 40)
+        sideDrawer.layer.maskedCorners = [.layerMaxXMinYCorner]
         
         //adding pan gesture recognizer to top area
         let topAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(topAreaDragged(_:)))
@@ -204,6 +207,7 @@ class ViewController: UIViewController {
         topAreaDrag.delaysTouchesBegan = false
         topAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to top area
         self.topCardView.addGestureRecognizer(topAreaDrag)
         
         //adding screen edge pan gesture recognizer to side drawer
@@ -218,15 +222,19 @@ class ViewController: UIViewController {
         sideAreaDrag.delaysTouchesBegan = false
         sideAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to main and side view
         self.view.addGestureRecognizer(sideAreaScreenEdgeDrag)
         self.sideDrawer.addGestureRecognizer(sideAreaDrag)
-
+        
         
         //calculating the amount of points the constraint is able to have max
         maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.15)) * -1
         
         //calculating the amount of points the constraint is able to have max
-        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.7) * -1
+        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.72) * -1
+        
+        //setting size of leading constraint for sideDrawer
+        sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer
         
     }
     
@@ -243,35 +251,60 @@ class ViewController: UIViewController {
             if newValue > maxDraggablePointsTopArea && newValue < 0 {
                 self.topAreaBottomConstraint.constant = newValue
                 self.view.layoutIfNeeded()
+                
+                //fold sideDrawer back if expanded
+                if sideDrawerState == .expanded{
+                    sideDrawerToCollapsed()
+                }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //top area is in the lower half
                 if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
+                    //velocity of drag is high enough for bounce
                     if panRecognizer.velocity(in: self.view).y > 1500{
-                        changeTopCardViewHeightWithBunce(to: maxDraggablePointsTopArea)
+                        topAreaToExpanded(withBounce: true)
+                    //animate top area down without bounce, due to low velocity
                     }else {
-                        changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
-                        topAreaState = .expanded
+                        topAreaToExpanded(withBounce: false)
                     }
+                //top area has not been dragged down far enough, animate back up
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: 0)
+                    topAreaToCollapsed()
                 }
                 
             case .expanded:
+                //top area is in the top half when let go of drag
                 if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
-                    changeTopCardViewHeightWithAnimation(to: 0)
-                    self.view.layoutIfNeeded()
-                    topAreaState = .normal
+                    topAreaToCollapsed()
+                //top area is in lower half when let go of drag and gets back to expanded position
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                    topAreaToExpanded(withBounce: false)
                 }
             }
             
         default:
             break
         }
+    }
+    
+    //moving top area back in
+    func topAreaToCollapsed(){
+        changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
+        topAreaState = .normal
+    }
+    
+    //expanding top area with or without bounce animation
+    func topAreaToExpanded(withBounce: Bool){
+        if withBounce {
+            changeConstraintValueWithBounce(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+        }else{
+            changeConstraintWithAnimation(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+            
+        }
+        topAreaState = .expanded
     }
     
     
@@ -287,30 +320,39 @@ class ViewController: UIViewController {
             let newValue = self.sideDrawerTrailingConstraintVal - translation.x
             if newValue > maxDraggablePointsSideDrawer && newValue < 0 {
                 self.sideDrawerTrailingConstraint.constant = newValue
+                self.sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer + -1 * newValue
                 self.view.layoutIfNeeded()
+                
+                //fold topArea back if extended
+                if topAreaState == .expanded{
+                    topAreaToCollapsed()
+                }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //is the side area let go of whilst being in the right half of screen?
                 if self.sideDrawerTrailingConstraint.constant < maxDraggablePointsSideDrawer / 2 {
-                    if panRecognizer.velocity(in: self.view).x > 1500{
-                        changeSideDrawerWidthWithBunce(to: maxDraggablePointsSideDrawer)
+                    //is the velocity of the drag gesture high enough for bounce animation?
+                    if panRecognizer.velocity(in: self.view).x > 1000{
+                        sideDrawerToExpanded(withBounce: true)
+                    //if not, just animate the side area into the expanded position without bounce
                     }else {
-                        changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
-                        sideDrawerState = .expanded
+                        sideDrawerToExpanded(withBounce: false)
                     }
+                //side area is not let go of in the right half, so just animate it back up
                 } else {
-                    changesideDrawerWidthWithAnimation(to: 0)
+                    sideDrawerToCollapsed()
                 }
                 
             case .expanded:
+                //is swiped back far enough to animate side area back to collapsed state
                 if self.sideDrawerTrailingConstraint.constant > maxDraggablePointsSideDrawer / 2 {
-                    changeTopCardViewHeightWithAnimation(to: 0)
-                    self.view.layoutIfNeeded()
-                    sideDrawerState = .normal
+                    sideDrawerToCollapsed()
+                //drag is not far enough, so animate side area back out
                 } else {
-                    changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
+                    sideDrawerToExpanded(withBounce: false)
                 }
             }
             
@@ -319,44 +361,42 @@ class ViewController: UIViewController {
         }
     }
     
+    //animates the top area to its collapsed state
+    func sideDrawerToCollapsed(){
+        changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
+        changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
+        sideDrawerState = .normal
+    }
     
-    func changeTopCardViewHeightWithAnimation(to: CGFloat){
+    //expands the top area eventually with a bounce
+    func sideDrawerToExpanded(withBounce: Bool){
+        if withBounce{
+            self.sideDrawerLeadingConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            changeConstraintValueWithBounce(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+        }else{
+            changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+            changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: 0)
+        }
+        sideDrawerState = .expanded
+    }
+    
+    
+    func changeConstraintWithAnimation(of: NSLayoutConstraint, to: CGFloat){
         UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-            self.topAreaBottomConstraint.constant = to
+            of.constant = to
             self.view.layoutIfNeeded()
         }).startAnimation()
     }
     
-    func changesideDrawerWidthWithAnimation(to: CGFloat){
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-            self.sideDrawerTrailingConstraint.constant = to
-            self.view.layoutIfNeeded()
-        }).startAnimation()
-    }
-    
-    
-    
-    
-    func changeTopCardViewHeightWithBunce(to: CGFloat){
-        UIView.animate(withDuration: 0.6, //1
+    func changeConstraintValueWithBounce(of: NSLayoutConstraint, to: CGFloat){
+        UIView.animate(withDuration: 0.4, //1
             delay: 0.0, //2
             usingSpringWithDamping: 0.3, //3
             initialSpringVelocity: 1, //4
             options: UIView.AnimationOptions.curveEaseInOut, //5
             animations: ({ //6
-                self.topAreaBottomConstraint.constant = to
-                self.view.layoutIfNeeded()
-            }), completion: nil)
-    }
-    
-    func changeSideDrawerWidthWithBunce(to: CGFloat){
-        UIView.animate(withDuration: 0.6, //1
-            delay: 0.0, //2
-            usingSpringWithDamping: 0.3, //3
-            initialSpringVelocity: 1, //4
-            options: UIView.AnimationOptions.curveEaseInOut, //5
-            animations: ({ //6
-                self.sideDrawerTrailingConstraint.constant = to
+                of.constant = to
                 self.view.layoutIfNeeded()
             }), completion: nil)
     }
