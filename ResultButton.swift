@@ -1,14 +1,14 @@
 //
-//  OperatorButtonMainScreen.swift
+//  ResultButton.swift
 //  INOC-Calculator
 //
-//  Created by FelixP on 22.01.20.
+//  Created by FelixP on 29.01.20.
 //  Copyright © 2020 XU Exponential University. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class OperatorButtonMainScreen: UIButton{
+@IBDesignable public class ResultButton: UIButton{
     override public init(frame: CGRect) {
         super.init(frame: frame)
         doStyling()
@@ -25,10 +25,12 @@ import UIKit
     }
     
     func doStyling(){
+        
+        self.layer.cornerRadius = self.frame.height / 2
 
-        //setting white color with alpha
+        //setting primary color
         self.setTitleColor(UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0), for: .normal)
         
-        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-ExtraLight", size: 31.0 * CGFloat(UIScreen.main.bounds.width / 414.0))!)
+        self.titleLabel?.font = UIFontMetrics.default.scaledFont(for: UIFont(name: "Exo-Regular", size: 35.0 * CGFloat(UIScreen.main.bounds.width / 414.0))!)
     }
 }

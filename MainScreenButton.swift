@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MainScreenButton: UIButton{
+@IBDesignable public class MainScreenButton: UIButton{
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
