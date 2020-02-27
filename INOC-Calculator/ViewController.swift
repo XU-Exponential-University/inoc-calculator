@@ -79,6 +79,8 @@ class ViewController: UIViewController {
     
     var result = 0.0
     
+    var toggledNumber = ""
+    
     @IBOutlet weak var resultLabel: UILabel!
     
     @IBOutlet weak var decimalButton: UIButton!
@@ -97,7 +99,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonClicked(_ sender: Any){
-        resultLabel.text = String(Double(-1) * Double(lastDigit)!)
+        if lastNumber == "" {
+            lastNumber = calculationString
+        }
+        let stringLength = lastNumber.count
+        for _ in 1...stringLength {
+            calculationString.removeLast()
+        }
+        toggledNumber = String(Double(-1) * Double(lastNumber)!)
+        lastNumber = toggledNumber
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+        
     }
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
@@ -155,11 +168,11 @@ class ViewController: UIViewController {
         
         clearText()
         
-        blockOperatorButton(block: sender)
-        
-        if previousButton != sender {
-            unblockOperatorButton()
-        }
+//        blockOperatorButton(block: sender)
+//
+//        if previousButton != sender {
+//            unblockOperatorButton()
+//        }
         previousButton = sender
         
     }
@@ -222,11 +235,11 @@ class ViewController: UIViewController {
     //    Maybe we should change the background color when its blocked..?
     func blockOperatorButton(block button: UIButton) {
         button.isEnabled = false
-        button.backgroundColor = #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0.2658390411)
+        
     }
     func unblockOperatorButton() {
         previousButton.isEnabled = true
-        previousButton.backgroundColor = #colorLiteral(red: 0.1298420429, green: 0.1298461258, blue: 0.1298439503, alpha: 0)
+       
     }
     
     
