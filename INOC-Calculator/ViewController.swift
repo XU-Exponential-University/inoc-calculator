@@ -106,8 +106,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
-        if resultLabel.text != "0" {
-            lastDigit += sender.currentTitle!
+        if lastNumber != "0" {
+            lastDigit = sender.currentTitle!
+            
+            lastNumber += lastDigit
+            
+            calculationString += lastDigit
             
             resultLabel.text = calculationString
         }
@@ -181,6 +185,8 @@ class ViewController: UIViewController {
         previousCalculation = calculationString
         calculationString = "\(result)"
         clearText()
+        blockOperatorButton(block: sender)
+
         unblockOperatorButton()
     }
     
