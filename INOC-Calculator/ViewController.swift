@@ -186,7 +186,7 @@ class ViewController: UIViewController {
         calculationString = "\(result)"
         clearText()
         blockOperatorButton(block: sender)
-
+        previousButton = sender
         unblockOperatorButton()
     }
     
