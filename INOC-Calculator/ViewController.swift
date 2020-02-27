@@ -190,6 +190,8 @@ class ViewController: UIViewController {
         unblockOperatorButton()
     }
     
+    //test comment hihi
+    
     //    This function is connected to the buttons of number 1 to 9 from the storyboard:
     @IBAction func numberButtonClicked(_ sender: UIButton){
 //        currentOpertor = "" so it does not add additional .0 twice in operator function, calculationString ="" to start a new calculation
