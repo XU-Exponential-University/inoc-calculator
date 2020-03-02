@@ -64,21 +64,19 @@ class ViewController: UIViewController {
     
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
-    
+//    last digit that was pressed
     var lastDigit = ""
-    
+//   last number (which later piles up from the digits)
     var lastNumber = ""
-    
+//    the last operstor that was clicked
     var currentOperator = ""
-    
-    var currentNumber = ""
     
     var calculationString = ""
     
     var previousCalculation = ""
     
     var result = 0.0
-    
+//    the number that shoukd be toggled with positive or negative sign
     var toggledNumber = ""
     
     @IBOutlet weak var resultLabel: UILabel!
@@ -89,28 +87,32 @@ class ViewController: UIViewController {
     @IBAction func clearButtonClicked(_ sender: Any) {
         
         clearText()
-//        currentNumber = ""
+
         currentOperator = ""
         resultLabel.text = "0"
         calculationString = ""
         
-        unblockOperatorButton()
-        previousButton = UIButton()
     }
     
     @IBAction func toggleSignButtonClicked(_ sender: Any){
-        if lastNumber == "" {
+//        the function should not execute if there is no number (when first open the app or after clearing)
+        if lastNumber != "" || calculationString != "" {
+            if lastNumber == "" {
             lastNumber = calculationString
         }
-        let stringLength = lastNumber.count
-        for _ in 1...stringLength {
-            calculationString.removeLast()
-        }
-        toggledNumber = String(Double(-1) * Double(lastNumber)!)
-        lastNumber = toggledNumber
-        calculationString += lastNumber
-        resultLabel.text = calculationString
+//            check the length of the last number
+            let stringLength = lastNumber.count
+//            remove the last number
+            for _ in 1...stringLength {
+                calculationString.removeLast()
+            }
+//            change the sign of the number and put it back
+            toggledNumber = String(Double(-1) * Double(lastNumber)!)
+            lastNumber = toggledNumber
+            calculationString += lastNumber
+            resultLabel.text = calculationString
         
+        }
     }
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
@@ -119,43 +121,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
+        if currentOperator == "=" {
+            calculationString = ""
+            currentOperator = ""
+        }
+//      the function will add a 0 only if the number is not already 0:
         if lastNumber != "0" {
-            lastDigit = sender.currentTitle!
-            
-            lastNumber += lastDigit
-            
-            calculationString += lastDigit
+            getLastDigitAndNumber(button: sender)
             
             resultLabel.text = calculationString
         }
     }
     
     @IBAction func decimalButtonClicked(_ sender: UIButton){
-        decimalButton.isEnabled = false
+//        preventing the button from being pressed twice in a number
+        if lastNumber.contains(".") == false && currentOperator != "=" {
+           
         if lastNumber == "" {
             lastNumber = "0."
             calculationString += lastNumber
-            
         }
         else {
-            lastDigit = sender.currentTitle!
-            
-            lastNumber += lastDigit
-            calculationString += lastDigit
-            
-            unblockOperatorButton()
+            getLastDigitAndNumber(button: sender)
         }
         resultLabel.text = calculationString
     }
-    
+    }
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
         print(lastNumber)
-        print(currentOperator != "=")
-        
+        if calculationString != ""  {
         if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
             calculationString.removeLast()
-            print("1. \(calculationString)")
         }
         else {
             if lastNumber.contains(".") == false && currentOperator != "=" {
@@ -165,20 +162,16 @@ class ViewController: UIViewController {
         currentOperator = "\(sender.currentTitle!)"
         calculationString += currentOperator
         print(calculationString)
+        resultLabel.text = calculationString
         
         clearText()
         
-//        blockOperatorButton(block: sender)
-//
-//        if previousButton != sender {
-//            unblockOperatorButton()
-//        }
-        previousButton = sender
-        
+    }
     }
     
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
+        if currentOperator != "=" {
         //        calculationString += numberOnScreen
         if lastNumber.contains(".") == false {
             lastNumber += ".0"
@@ -188,7 +181,6 @@ class ViewController: UIViewController {
         print(calculationString)
         calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
         let y = NSExpression(format:calculationString)
-        
         result = y.expressionValue(with: nil, context: nil) as! Double
         print(result)
         calculationString += currentOperator
@@ -196,54 +188,40 @@ class ViewController: UIViewController {
         resultLabel.text = calculationString
 //        to store the calculation String for the History before it will be deleted:
         previousCalculation = calculationString
+//            After calculation there should only be the result in the string
         calculationString = "\(result)"
         clearText()
-        blockOperatorButton(block: sender)
-        previousButton = sender
-        unblockOperatorButton()
+
     }
-    
-    //test comment hihi
+    }
     
     //    This function is connected to the buttons of number 1 to 9 from the storyboard:
     @IBAction func numberButtonClicked(_ sender: UIButton){
-//        currentOpertor = "" so it does not add additional .0 twice in operator function, calculationString ="" to start a new calculation
+//        after previous calculation if there was no operator clicked, then when clicking a number
         if currentOperator == "=" {
+//            to start a new calculation
             calculationString = ""
+//            so it does not add additional .0 twice in operator function,
             currentOperator = ""
         }
-        lastDigit = sender.currentTitle!
-        
-        lastNumber += lastDigit
-        
-        calculationString += lastDigit
+        getLastDigitAndNumber(button: sender)
         
         resultLabel.text = calculationString
-        unblockOperatorButton()
-        print("last digit \(lastDigit) & \(lastNumber) calculation \(calculationString)")
+
     }
-    
+    func getLastDigitAndNumber(button: UIButton) {
+        lastDigit = button.currentTitle!
+        lastNumber += lastDigit
+        calculationString += lastDigit
+    }
     
     //    This function clears the text on the Label and enables the decimal BUtton
     func clearText() {
         lastDigit = ""
         lastNumber = ""
-        decimalButton.isEnabled = true
+//        decimalButton.isEnabled = true
     }
-    
-    //    empty Button
-    var previousButton = UIButton()
-    //    This function should block operator from being executed twice unnessasarily:
-    //    Maybe we should change the background color when its blocked..?
-    func blockOperatorButton(block button: UIButton) {
-        button.isEnabled = false
-        
-    }
-    func unblockOperatorButton() {
-        previousButton.isEnabled = true
-       
-    }
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
