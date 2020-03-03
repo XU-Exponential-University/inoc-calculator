@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
@@ -76,7 +77,7 @@ class ViewController: UIViewController {
     var previousCalculation = ""
     
     var result = 0.0
-//    the number that shoukd be toggled with positive or negative sign
+//    the number that should be toggled with positive or negative sign
     var toggledNumber = ""
     
     @IBOutlet weak var resultLabel: UILabel!
@@ -134,55 +135,62 @@ class ViewController: UIViewController {
     }
     
     @IBAction func decimalButtonClicked(_ sender: UIButton){
-//        preventing the button from being pressed twice in a number
+        //        preventing the button from being pressed twice in a number
         if lastNumber.contains(".") == false && currentOperator != "=" {
-           
-        if lastNumber == "" {
-            lastNumber = "0."
-            calculationString += lastNumber
+            
+            if lastNumber == "" {
+                lastNumber = "0."
+                calculationString += lastNumber
+            }
+            else {
+                getLastDigitAndNumber(button: sender)
+            }
+            resultLabel.text = calculationString
         }
-        else {
-            getLastDigitAndNumber(button: sender)
-        }
-        resultLabel.text = calculationString
-    }
     }
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
         print(lastNumber)
         if calculationString != ""  {
-        if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
-            calculationString.removeLast()
+            if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
+                calculationString.removeLast()
+            }
+            else if currentOperator != "=" {
+               convertToDouble()
+            }
+            currentOperator = "\(sender.currentTitle!)"
+            calculationString += currentOperator
+            print(calculationString)
+            resultLabel.text = calculationString
+            
+            clearText()
+            
         }
-        else {
-            if lastNumber.contains(".") == false && currentOperator != "=" {
-                lastNumber += ".0"
-                calculationString += ".0"
-            } }
-        currentOperator = "\(sender.currentTitle!)"
-        calculationString += currentOperator
-        print(calculationString)
-        resultLabel.text = calculationString
-        
-        clearText()
-        
     }
+    func convertToDouble() {
+        if lastDigit == "." {
+                           lastNumber.removeLast()
+                           calculationString.removeLast()
+                           lastNumber += ".0"
+                           calculationString += ".0"
+                       } else if !lastNumber.contains(".") {
+                           lastNumber += ".0"
+                           calculationString += ".0"
+                       }
     }
-    
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
         if currentOperator != "=" {
-        //        calculationString += numberOnScreen
-        if lastNumber.contains(".") == false {
-            lastNumber += ".0"
-            calculationString += ".0"
-        }
+        convertToDouble()
         currentOperator = "="
         print(calculationString)
+//            replacing x to * so it can calculate
         calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
+//            change the calculation String to an expression that can be calculated
         let y = NSExpression(format:calculationString)
         result = y.expressionValue(with: nil, context: nil) as! Double
         print(result)
+        result = result.rounded(toPlaces: 5)
         calculationString += currentOperator
         calculationString += "\(result)"
         resultLabel.text = calculationString
@@ -449,3 +457,9 @@ extension NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
     }
 }
+extension Double {
+       func rounded(toPlaces places:Int) -> Double {
+           let divisor = pow(10.0, Double(places))
+           return (self * divisor).rounded() / divisor
+       }
+   }
