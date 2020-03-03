@@ -243,6 +243,193 @@ class ViewController: UIViewController {
         previousButton.isEnabled = true
        
     }
+   
+    
+    
+    
+    
+    @IBAction func Power2(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(pow(value ?? 0, 2))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    @IBAction func RightBracket(_ sender: SideDrawerButton) {
+            lastNumber = ")"
+            calculationString += lastNumber
+           resultLabel.text = calculationString
+        
+    }
+    // so far I've developed a switch for the lasNumber/currentOpperator. However, due to remove last operand func, the bracket can only be processed as a number
+    @IBAction func LeftBracket(_ sender: SideDrawerButton) {
+            lastNumber = "("
+        //     switch currentOperator {
+     //   case "*":
+       //     currentOperator = "*("
+        //case "/":
+          //  currentOperator = "/("
+        //case "-":
+         //   currentOperator = "-("
+        //case "+":
+         //   currentOperator = "+("
+        //case "(":
+         //   currentOperator = "(("
+        //case "":
+         //   currentOperator = "("
+        //default:
+          //  currentOperator = "Error"
+        // }
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    
+    @IBAction func RandomNumberGen(_ sender: SideDrawerButton) {
+    switch lastDigit {
+        case "0":
+            calculationString = "\(drand48())"
+            // randomized a number between 0 and 1, with a limited number of signifcant figures
+            // next fucntion randomize the number based on the upper limit, and the lower limit, is alway the lowest value within the same number of figures as the upper limit
+            // I've orginally done this function with an if else statement, but then was asked to redo it in a "switch" based mode.
+        case "1":
+    calculationString = "\(Double(arc4random_uniform(10)))"
+        case "2":
+    calculationString = "\(Double(arc4random_uniform(100)))"
+        case "3":
+    calculationString = "\(Double(arc4random_uniform(1000)))"
+        case "4":
+    calculationString = "\(Double(arc4random_uniform(10000)))"
+        case "5":
+    calculationString = "\(Double(arc4random_uniform(100000)))"
+        case "6":
+    calculationString = "\(Double(arc4random_uniform(1000000)))"
+        case "7":
+    calculationString = "\(Double(arc4random_uniform(10000000)))"
+        case "8":
+    calculationString = "\(Double(arc4random_uniform(100000000)))"
+        case "9":
+    calculationString = "\(Double(arc4random_uniform(1000000000)))"
+        // this is the basic out of the function, after the user presses the function buttons (the output on the label view)
+        default:
+            calculationString = "Choose Number of Figures"
+        }
+        resultLabel.text = calculationString
+    
+    }
+    // this is a function, that is referred in the actuall factorial butto event
+    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because UInt has a maximum output value and 21 input breaks it
+        // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
+        // we set the result here, once again the factorial has to always be greater than 0
+        // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
+        if 0 > number || number > 15{
+            return number
+    } else if number == 0 {
+        return 1
+        } else {
+    // the function must then perform the factorial multiplication
+            return number*factorial(number: number - 1)
+        }
+    }
+    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives
+    func powerFunction(value: Double, power: Double) -> Double {
+        return pow(value, power)
+    }
+    
+    @IBAction func LogBase2(_ sender: Any) {
+    let value = Double(lastNumber)
+        lastNumber = "\(logBase2(valueOfLog: value ?? 0))"
+    calculationString = ""
+    calculationString += lastNumber
+    resultLabel.text = calculationString
+    }
+    
+    @IBAction func LogBase10(_ sender: SideDrawerButton) {
+               let value = Double(lastNumber)
+        lastNumber = "\(logBase10(valueOfLog: value ?? 0))"
+               calculationString = ""
+               calculationString += lastNumber
+               resultLabel.text = calculationString
+        
+    }
+    
+    @IBAction func SquareRoot(_ sender: SideDrawerButton) {
+          let value = Double(lastNumber)
+          lastNumber = "\(sqrt(value ?? 0))"
+          calculationString = ""
+          calculationString += lastNumber
+          resultLabel.text = calculationString
+    }
+    
+    func squareRoot(valueToBeSquareRooted: Double) -> Double {
+        return sqrt(valueToBeSquareRooted)
+    }
+   
+    
+    @IBAction func Factorial(_ sender: SideDrawerButton) {
+    // where "number" setting has to be in  0 <= x <= 20, because UInt has a maximum output value and 21 input breaks it
+        // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
+        // we set the result here, once again the factorial has to always be greater than 0
+        // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
+        let number = Int(lastNumber)
+        if 0 > (number ?? -1) || (number ?? 16) > 15 {
+            lastNumber = ""
+                } else if (number ?? 0) == 0 {
+            lastNumber = "1"
+                } else {
+            lastNumber = "\((number ?? 2)*factorial(number: (number ?? 2) - 1))"
+    // the function must then perform the factorial multiplication
+            }
+        calculationString = lastNumber
+        resultLabel.text = calculationString
+    }
+    // a simple input of the e number
+    @IBAction func Eyuler(_ sender: SideDrawerButton) {
+        lastNumber = "\(e)"
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    // sin function
+    @IBAction func Sin(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(sin(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    // cos function
+    @IBAction func Cosine(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(cos(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    // tan fucntion, it conver the optional "value" type string into a type double, otherwise the function wouldnt be possible
+    @IBAction func Tangent(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(tan(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+}
+
+
+    //establishing e (natural num.)
+    let e = 2.1718281828459047
+    
+    // function for finding the logBase 10
+    func logBase10(valueOfLog: Double) -> Double {
+        return log(valueOfLog)
+    }
+    // function for finding the logBase 2
+    func logBase2(valueOfLog: Double) -> Double {
+        return log2(valueOfLog)
+    }
+
     
     
     override func viewDidLoad() {
