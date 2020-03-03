@@ -57,6 +57,9 @@
                                                             <constraint firstAttribute="width" secondItem="gd5-39-f4b" secondAttribute="height" multiplier="1:1" id="2N0-1A-ANg"/>
                                                         </constraints>
                                                         <state key="normal" title="%"/>
+                                                        <connections>
+                                                            <action selector="percentageButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XPd-yZ-HdV"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E2-TL-TMC" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator">
                                                         <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60.333333333333336"/>
