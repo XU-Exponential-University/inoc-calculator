@@ -264,7 +264,7 @@ class ViewController: UIViewController {
             with: "",
             options: .regularExpression
         )
-        filtered = filtered.replacingOccurrences(of: ".", with: "x")
+        filtered = filtered.replacingOccurrences(of: "·", with: "x")
         filtered = filtered.replacingOccurrences(of: "*", with: "x")
         
         resultLabel.text = filtered
