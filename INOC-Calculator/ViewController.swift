@@ -169,7 +169,10 @@ class ViewController: UIViewController {
     @IBAction func operatorClicked(_ sender: UIButton){
         print(lastNumber)
         if calculationString != ""  {
-            if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
+            if currentOperator == ")" {
+               
+            }
+            else if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/" {
                 calculationString.removeLast()
             }
             else if currentOperator != "=" {
