@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-5A-LlZ" userLabel="bottom area">
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-5A-LlZ" userLabel="bottom area">
                                 <rect key="frame" x="0.0" y="282.66666666666674" width="375" height="495.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C92-8P-fZp" userLabel="numpad">
@@ -303,7 +303,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aL-eK-LDG" userLabel="side drawer">
-                                <rect key="frame" x="-400" y="406.66666666666674" width="400" height="371.33333333333326"/>
+                                <rect key="frame" x="0.0" y="406.66666666666674" width="400" height="371.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Eu-y5-LcE">
                                         <rect key="frame" x="20" y="25" width="360" height="321.33333333333331"/>
@@ -317,6 +317,10 @@
                                                             <constraint firstAttribute="width" secondItem="0oU-DE-oqz" secondAttribute="height" multiplier="1:1" id="ULZ-PW-Aal"/>
                                                         </constraints>
                                                         <state key="normal" title="("/>
+                                                        <connections>
+                                                            <action selector="LeftBracket:" destination="BYZ-38-t0r" eventType="touchDown" id="RWF-N9-Xjf"/>
+                                                            <action selector="Try:" destination="BYZ-38-t0r" eventType="touchDown" id="tcd-Ug-xte"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-J5-cYt" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.333333333333336"/>
@@ -324,6 +328,9 @@
                                                             <constraint firstAttribute="width" secondItem="I3V-J5-cYt" secondAttribute="height" multiplier="1:1" id="bSd-2w-RGG"/>
                                                         </constraints>
                                                         <state key="normal" title=")"/>
+                                                        <connections>
+                                                            <action selector="RightBracket:" destination="BYZ-38-t0r" eventType="touchUpInside" id="adN-7y-rzg"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gG3-3w-znT" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.333333333333336"/>
@@ -331,6 +338,9 @@
                                                             <constraint firstAttribute="width" secondItem="gG3-3w-znT" secondAttribute="height" multiplier="1:1" id="ZFv-fc-xp8"/>
                                                         </constraints>
                                                         <state key="normal" title="x²"/>
+                                                        <connections>
+                                                            <action selector="Power2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ePm-lM-0cK"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -347,7 +357,10 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vMs-Jl-Hl2" secondAttribute="height" multiplier="1:1" id="sTE-Ia-GuL"/>
                                                         </constraints>
-                                                        <state key="normal" title="xⁿ"/>
+                                                        <state key="normal" title="R"/>
+                                                        <connections>
+                                                            <action selector="RandomNumberGen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TZs-4f-AuT"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR4-Y3-blW" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
@@ -355,6 +368,9 @@
                                                             <constraint firstAttribute="width" secondItem="xR4-Y3-blW" secondAttribute="height" multiplier="1:1" id="QLO-Gy-2sF"/>
                                                         </constraints>
                                                         <state key="normal" title="ln"/>
+                                                        <connections>
+                                                            <action selector="LogBase2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="00e-Rg-V1z"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-Eh-neY" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
@@ -362,6 +378,9 @@
                                                             <constraint firstAttribute="width" secondItem="6ez-Eh-neY" secondAttribute="height" multiplier="1:1" id="Zcr-LB-BUA"/>
                                                         </constraints>
                                                         <state key="normal" title="log"/>
+                                                        <connections>
+                                                            <action selector="LogBase10:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VEn-Cu-zA3"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -379,6 +398,9 @@
                                                             <constraint firstAttribute="width" secondItem="ywC-4Z-An5" secondAttribute="height" multiplier="1:1" id="3BG-rY-3Vc"/>
                                                         </constraints>
                                                         <state key="normal" title="e"/>
+                                                        <connections>
+                                                            <action selector="Eyuler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7UK-is-7t8"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baF-7J-Pfc" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
@@ -386,6 +408,9 @@
                                                             <constraint firstAttribute="width" secondItem="baF-7J-Pfc" secondAttribute="height" multiplier="1:1" id="nNc-Yw-1cl"/>
                                                         </constraints>
                                                         <state key="normal" title="!"/>
+                                                        <connections>
+                                                            <action selector="Factorial:" destination="BYZ-38-t0r" eventType="touchUpInside" id="35u-wX-TPh"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHS-MR-GKH" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
@@ -393,6 +418,9 @@
                                                             <constraint firstAttribute="width" secondItem="nHS-MR-GKH" secondAttribute="height" multiplier="1:1" id="e4g-XQ-E4n"/>
                                                         </constraints>
                                                         <state key="normal" title="√"/>
+                                                        <connections>
+                                                            <action selector="SquareRoot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ffw-Uq-6vH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -410,6 +438,9 @@
                                                             <constraint firstAttribute="width" secondItem="izk-4x-blL" secondAttribute="height" multiplier="1:1" id="oof-Yd-aO2"/>
                                                         </constraints>
                                                         <state key="normal" title="sin"/>
+                                                        <connections>
+                                                            <action selector="Sin:" destination="BYZ-38-t0r" eventType="touchDown" id="C9f-tc-CCb"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUD-fo-vGS" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
@@ -417,6 +448,9 @@
                                                             <constraint firstAttribute="width" secondItem="jUD-fo-vGS" secondAttribute="height" multiplier="1:1" id="DtD-td-jJg"/>
                                                         </constraints>
                                                         <state key="normal" title="cos"/>
+                                                        <connections>
+                                                            <action selector="Cosine:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fMI-0M-XLl"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-zq-xXj" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
                                                         <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
@@ -424,6 +458,9 @@
                                                             <constraint firstAttribute="width" secondItem="WGJ-zq-xXj" secondAttribute="height" multiplier="1:1" id="bcJ-Vz-0ug"/>
                                                         </constraints>
                                                         <state key="normal" title="tan"/>
+                                                        <connections>
+                                                            <action selector="Tangent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ezY-Xy-ZNr"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -457,13 +494,13 @@
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8rp-PI-Ijl"/>
                             <constraint firstItem="3Em-il-Gjh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="A0X-cX-hm8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cVf-5A-LlZ" secondAttribute="bottom" id="ERn-Gd-SDt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="9aL-eK-LDG" secondAttribute="trailing" id="G5f-Iq-CWe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="9aL-eK-LDG" secondAttribute="trailing" constant="-400" id="G5f-Iq-CWe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cVf-5A-LlZ" secondAttribute="trailing" id="NLs-oZ-OUf"/>
                             <constraint firstItem="9aL-eK-LDG" firstAttribute="height" secondItem="cVf-5A-LlZ" secondAttribute="height" multiplier="0.75" id="hyL-gH-e20"/>
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="top" secondItem="3Em-il-Gjh" secondAttribute="bottom" id="y1c-EV-CWl"/>
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.61" id="yHf-dN-pEy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9aL-eK-LDG" secondAttribute="bottom" id="yMt-1n-PVi"/>
-                            <constraint firstItem="9aL-eK-LDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-400" id="zMf-Ch-DLc"/>
+                            <constraint firstItem="9aL-eK-LDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zMf-Ch-DLc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
