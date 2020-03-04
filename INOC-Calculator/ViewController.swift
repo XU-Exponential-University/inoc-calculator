@@ -173,7 +173,10 @@ class ViewController: UIViewController {
     @IBAction func operatorClicked(_ sender: UIButton){
         print(lastNumber)
         if calculationString != ""  {
-            if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/"  {
+            if currentOperator == ")" {
+               
+            }
+            else if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/" {
                 calculationString.removeLast()
             }
             else if currentOperator != "=" {
@@ -205,7 +208,7 @@ class ViewController: UIViewController {
             calculationString = ""
         }
         else if currentOperator != "=" {
-            if currentOperator != "%" { convertToDouble() }
+//            if currentOperator != "%" { convertToDouble() }
             currentOperator = "="
            calculateString()
             calculationString += currentOperator
@@ -269,14 +272,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func RightBracket(_ sender: SideDrawerButton) {
-            lastNumber = ")"
-            calculationString += lastNumber
+            
+            calculationString += ")"
+                currentOperator = ")"
            resultLabel.text = calculationString
         
     }
     // so far I've developed a switch for the lasNumber/currentOpperator. However, due to remove last operand func, the bracket can only be processed as a number
     @IBAction func LeftBracket(_ sender: SideDrawerButton) {
-            lastNumber = "("
+        
+           
         //     switch currentOperator {
      //   case "*":
        //     currentOperator = "*("
@@ -292,8 +297,9 @@ class ViewController: UIViewController {
          //   currentOperator = "("
         //default:
           //  currentOperator = "Error"
-        // }
-        calculationString += lastNumber
+        // }"
+        calculationString += "("
+        currentOperator = "("
         resultLabel.text = calculationString
     }
     
