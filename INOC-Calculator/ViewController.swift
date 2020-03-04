@@ -171,7 +171,7 @@ class ViewController: UIViewController {
     }
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
-        print(lastNumber)
+       
         if calculationString != ""  {
             if currentOperator == ")" {
                
@@ -258,8 +258,16 @@ class ViewController: UIViewController {
     }
 
     func showCalculation(of string: String) {
-        let replaced = string.replacingOccurrences(of: ".0", with: "")
-        resultLabel.text = replaced
+        let replaced = string.replacingOccurrences(of: "x", with: "·")
+        var filtered = replaced.replacingOccurrences(
+            of: #"(\.0\b)"#,
+            with: "",
+            options: .regularExpression
+        )
+        filtered = filtered.replacingOccurrences(of: ".", with: "x")
+        filtered = filtered.replacingOccurrences(of: "*", with: "x")
+        
+        resultLabel.text = filtered
     }
    
     
