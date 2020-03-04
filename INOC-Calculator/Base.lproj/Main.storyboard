@@ -319,7 +319,6 @@
                                                         <state key="normal" title="("/>
                                                         <connections>
                                                             <action selector="LeftBracket:" destination="BYZ-38-t0r" eventType="touchDown" id="RWF-N9-Xjf"/>
-                                                            <action selector="Try:" destination="BYZ-38-t0r" eventType="touchDown" id="tcd-Ug-xte"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-J5-cYt" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
