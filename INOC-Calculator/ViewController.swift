@@ -128,15 +128,8 @@ class ViewController: UIViewController {
             resultLabel.text = calculationString + "%"
                 removeLastNumber()
                 calculationString.removeLast()
-                    calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
-                
-                        let y = NSExpression(format:calculationString)
-                        result = y.expressionValue(with: nil, context: nil) as! Double
-                        result = result.rounded(toPlaces: 5)
-                
+                 calculateString()
                  let percentage = result * Double(lastNumber)! / 100
-                
-                
                  calculationString += currentOperator
                 calculationString += String(percentage)
                 print("S \(calculationString)")
@@ -200,34 +193,35 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
-//        prevent crashing if there is no number after an operator
-       
+        //        prevent crashing if there is no number after an operator
+        
         if lastNumber == "" {
             resultLabel.text = "Error"
             clearText()
             calculationString = ""
         }
         else if currentOperator != "=" {
-       if currentOperator != "%" { convertToDouble() }
-        currentOperator = "="
-        
-//            replacing x to * so it can calculate
-        calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
-//            change the calculation String to an expression that can be calculated
-        let y = NSExpression(format:calculationString)
-        result = y.expressionValue(with: nil, context: nil) as! Double
-        print(result)
-        result = result.rounded(toPlaces: 5)
-        calculationString += currentOperator
-        calculationString += "\(result)"
-        resultLabel.text = calculationString
-//        to store the calculation String for the History before it will be deleted:
-        previousCalculation = calculationString
-//            After calculation there should only be the result in the string
-        calculationString = "\(result)"
-        clearText()
-
+            if currentOperator != "%" { convertToDouble() }
+            currentOperator = "="
+           calculateString()
+            calculationString += currentOperator
+            calculationString += "\(result)"
+            resultLabel.text = calculationString
+            //        to store the calculation String for the History before it will be deleted:
+            previousCalculation = calculationString
+            //            After calculation there should only be the result in the string
+            calculationString = "\(result)"
+            clearText()
+            
+        }
     }
+    func calculateString() {
+        //            replacing x to * so it can calculate
+             calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
+             //            change the calculation String to an expression that can be calculated
+             let y = NSExpression(format:calculationString)
+             result = y.expressionValue(with: nil, context: nil) as! Double
+        result = result.rounded(toPlaces: 5)
     }
     
     //    This function is connected to the buttons of number 1 to 9 from the storyboard:
