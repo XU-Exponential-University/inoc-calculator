@@ -106,8 +106,7 @@ class ViewController: UIViewController {
             toggledNumber = String(Double(-1) * Double(lastNumber)!)
             lastNumber = toggledNumber
             calculationString += lastNumber
-            resultLabel.text = calculationString
-        
+             showCalculation(of: calculationString)
         }
     }
     
@@ -122,20 +121,25 @@ class ViewController: UIViewController {
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
 
-        if calculationString != "" {
-            if currentOperator != "" || currentOperator != "="  {
-                convertToDouble()
-            resultLabel.text = calculationString + "%"
-                removeLastNumber()
-                calculationString.removeLast()
-                 calculateString()
-                 let percentage = result * Double(lastNumber)! / 100
-                 calculationString += currentOperator
-                calculationString += String(percentage)
-                print("S \(calculationString)")
-                 currentOperator = "%"
-             }
-    }
+            if calculationString != "" {
+                if currentOperator == "=" || currentOperator == "" {
+                    calculationString = String(Double(calculationString)! / 100)
+                    showCalculation(of: calculationString)
+                }
+                else if currentOperator != "" {
+                    convertToDouble()
+                     showCalculation(of: calculationString + "%")
+
+                    removeLastNumber()
+                    calculationString.removeLast()
+                     calculateString()
+                     let percentage = result * Double(lastNumber)! / 100
+                     calculationString += currentOperator
+                    calculationString += String(percentage)
+                    print("S \(calculationString)")
+                     currentOperator = "%"
+                 }
+        }
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
@@ -147,7 +151,7 @@ class ViewController: UIViewController {
         if lastNumber != "0" {
             getLastDigitAndNumber(button: sender)
             
-            resultLabel.text = calculationString
+            showCalculation(of: calculationString)
         }
     }
     
@@ -162,12 +166,12 @@ class ViewController: UIViewController {
             else {
                 getLastDigitAndNumber(button: sender)
             }
-            resultLabel.text = calculationString
+             showCalculation(of: calculationString)
         }
     }
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
-        print(lastNumber)
+       
         if calculationString != ""  {
             if currentOperator == ")" {
                
@@ -181,7 +185,7 @@ class ViewController: UIViewController {
             currentOperator = "\(sender.currentTitle!)"
             calculationString += currentOperator
             print(calculationString)
-            resultLabel.text = calculationString
+            showCalculation(of: calculationString)
             
             clearText()
             
@@ -209,7 +213,7 @@ class ViewController: UIViewController {
            calculateString()
             calculationString += currentOperator
             calculationString += "\(result)"
-            resultLabel.text = calculationString
+            showCalculation(of: calculationString)
             //        to store the calculation String for the History before it will be deleted:
             previousCalculation = calculationString
             //            After calculation there should only be the result in the string
@@ -238,7 +242,7 @@ class ViewController: UIViewController {
         }
         getLastDigitAndNumber(button: sender)
         
-        resultLabel.text = calculationString
+        showCalculation(of: calculationString)
 
     }
     func getLastDigitAndNumber(button: UIButton) {
@@ -253,11 +257,19 @@ class ViewController: UIViewController {
         lastNumber = ""
     }
 
-    
+    func showCalculation(of string: String) {
+        let replaced = string.replacingOccurrences(of: "x", with: "·")
+        var filtered = replaced.replacingOccurrences(
+            of: #"(\.0\b)"#,
+            with: "",
+            options: .regularExpression
+        )
+        filtered = filtered.replacingOccurrences(of: "·", with: "x")
+        filtered = filtered.replacingOccurrences(of: "*", with: "x")
+        
+        resultLabel.text = filtered
+    }
    
-    
-    
-    
     
     @IBAction func Power2(_ sender: SideDrawerButton) {
         let value = Double(lastNumber)
