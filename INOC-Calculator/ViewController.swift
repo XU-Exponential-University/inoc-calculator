@@ -73,6 +73,9 @@ class ViewController: UIViewController {
     
     //END OF FELIX CODE
     
+    
+    
+    
 //    last digit that was pressed
     var lastDigit = ""
 //   last number (which later piles up from the digits)
@@ -127,6 +130,22 @@ class ViewController: UIViewController {
                         calculationString.removeLast()
                     }
     }
+    
+    //START FELIX CODE
+    
+    //TODO get text from the history and make the calculation work afterwards
+    @IBAction func getTextFromHistory(_ sender: UIButton) {
+        var historyString = sender.attributedTitle(for: .normal)?.string as! NSString
+        let histroyStringRealString = historyString.replacingOccurrences(of: "=", with: "")
+        print(type(of: histroyStringRealString))
+        print(histroyStringRealString)
+        if(sender.tag == 1002){
+            lastNumber = histroyStringRealString
+        }
+        showCalculation(of: histroyStringRealString)
+    }
+    
+    //END FELIX CODE
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
 
@@ -231,6 +250,7 @@ class ViewController: UIViewController {
             
         }
     }
+    
     func calculateString() {
         //            replacing x to * so it can calculate
              calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
@@ -254,6 +274,7 @@ class ViewController: UIViewController {
         showCalculation(of: calculationString)
 
     }
+    
     func getLastDigitAndNumber(button: UIButton) {
         lastDigit = button.currentTitle!
         lastNumber += lastDigit
@@ -465,6 +486,12 @@ class ViewController: UIViewController {
         return log2(valueOfLog)
     }
 
+    
+    
+    
+    
+    
+    //FELIX CODE START
     
     
     override func viewDidLoad() {
@@ -704,7 +731,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         
         return historyCell
     }
-    
 }
 
 extension NSLayoutConstraint {
@@ -718,3 +744,7 @@ extension Double {
            return (self * divisor).rounded() / divisor
        }
    }
+
+
+
+//END FELIX CODE

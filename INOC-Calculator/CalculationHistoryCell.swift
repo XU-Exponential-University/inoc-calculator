@@ -9,16 +9,13 @@
 import UIKit
 
 class CalculationHistoryCell: UITableViewCell {
-
-    @IBOutlet weak var calculationLabel: UILabel!
     
-    @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var calculationText: UIButton!
+    @IBOutlet weak var resultText: UIButton!
     
     
     func setText(calculation: Calculation){
-        print("setText")
-        calculationLabel.text = calculation.calculationText
-        resultLabel.text = calculation.resultText
-        
+        self.calculationText.setAttributedTitle(NSAttributedString(string: calculation.calculationText, attributes: calculationText.attributedTitle(for: .normal)?.attributes(at: 0, effectiveRange: nil)), for: .normal)
+        self.resultText.setAttributedTitle(NSAttributedString(string: calculation.resultText, attributes: resultText.attributedTitle(for: .normal)?.attributes(at: 0, effectiveRange: nil)), for: .normal)
     }
 }

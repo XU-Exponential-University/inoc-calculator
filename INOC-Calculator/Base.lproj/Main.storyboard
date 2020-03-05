@@ -11,12 +11,6 @@
         <array key="Exo-Medium.ttf">
             <string>Exo-Medium</string>
         </array>
-        <array key="Exo-Regular.ttf">
-            <string>Exo-Regular</string>
-        </array>
-        <array key="Exo-SemiBold.ttf">
-            <string>Exo-SemiBold</string>
-        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -290,46 +284,66 @@
                                         <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgk-6z-Lx0">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgk-6z-Lx0">
                                         <rect key="frame" x="20" y="51.999999999999993" width="374" height="119.33333333333331"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CalculationHistoryCell" id="xeG-Xy-zHS" customClass="CalculationHistoryCell" customModule="INOC_Calculator" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="374" height="80"/>
+                                                <rect key="frame" x="0.0" y="28" width="374" height="100"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xeG-Xy-zHS" id="lzw-kY-pI2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12+13+16-9" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBr-ex-df6" userLabel="calculation">
-                                                            <rect key="frame" x="32" y="21" width="310" height="29.333333333333329"/>
-                                                            <accessibility key="accessibilityConfiguration">
-                                                                <accessibilityTraits key="traits" staticText="YES" allowsDirectInteraction="YES"/>
-                                                            </accessibility>
-                                                            <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="22"/>
-                                                            <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="=10" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-wy-QXT" userLabel="result">
-                                                            <rect key="frame" x="32" y="57.333333333333336" width="310" height="25.333333333333336"/>
-                                                            <fontDescription key="fontDescription" name="Exo-SemiBold" family="Exo" pointSize="19"/>
-                                                            <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="headTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fbB-Zv-CrA">
+                                                            <rect key="frame" x="32" y="15.999999999999996" width="330" height="38.666666666666657"/>
+                                                            <color key="tintColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <state key="normal">
+                                                                <attributedString key="attributedTitle">
+                                                                    <fragment content="12+14+14-20">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                            <font key="NSFont" size="20" name="Exo-Regular"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="getTextFromHistory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qdr-lq-CLA"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiJ-gF-Xl3">
+                                                            <rect key="frame" x="12" y="57.666666666666657" width="350" height="49.333333333333343"/>
+                                                            <state key="normal">
+                                                                <attributedString key="attributedTitle">
+                                                                    <fragment content="=42">
+                                                                        <attributes>
+                                                                            <color key="NSColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                            <font key="NSFont" size="28" name="Exo-SemiBold"/>
+                                                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                                        </attributes>
+                                                                    </fragment>
+                                                                </attributedString>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="getTextFromHistory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ekp-Nn-rB1"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="1hg-wy-QXT" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leadingMargin" constant="12" id="1Xc-g9-Y61"/>
-                                                        <constraint firstItem="1hg-wy-QXT" firstAttribute="top" secondItem="QBr-ex-df6" secondAttribute="bottom" constant="7" id="BiL-eL-wee"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="1hg-wy-QXT" secondAttribute="trailing" constant="12" id="Fql-UR-zpO"/>
-                                                        <constraint firstItem="QBr-ex-df6" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leadingMargin" constant="12" id="bLs-dN-JN4"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="QBr-ex-df6" secondAttribute="trailing" constant="12" id="gTe-Sv-obK"/>
-                                                        <constraint firstItem="QBr-ex-df6" firstAttribute="top" secondItem="lzw-kY-pI2" secondAttribute="topMargin" constant="10" id="oFj-rQ-dvk"/>
+                                                        <constraint firstItem="IiJ-gF-Xl3" firstAttribute="top" secondItem="fbB-Zv-CrA" secondAttribute="bottom" constant="3" id="7ih-fJ-syL"/>
+                                                        <constraint firstItem="IiJ-gF-Xl3" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leading" constant="12" id="Iku-8a-PEq"/>
+                                                        <constraint firstItem="fbB-Zv-CrA" firstAttribute="top" secondItem="lzw-kY-pI2" secondAttribute="topMargin" constant="5" id="VTH-eM-dlm"/>
+                                                        <constraint firstItem="fbB-Zv-CrA" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leadingMargin" constant="12" id="cXG-Wj-ks8"/>
+                                                        <constraint firstAttribute="trailing" secondItem="IiJ-gF-Xl3" secondAttribute="trailing" constant="12" id="kQm-W7-HuC"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fbB-Zv-CrA" secondAttribute="trailing" constant="12" id="rST-UH-tvG"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="calculationLabel" destination="QBr-ex-df6" id="a4t-jV-vcR"/>
-                                                    <outlet property="resultLabel" destination="1hg-wy-QXT" id="9R6-pb-Fbr"/>
+                                                    <outlet property="calculationText" destination="fbB-Zv-CrA" id="GuD-z7-bDz"/>
+                                                    <outlet property="resultText" destination="IiJ-gF-Xl3" id="jxA-5W-d84"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -567,7 +581,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136" y="108"/>
+            <point key="canvasLocation" x="134.78260869565219" y="107.8125"/>
         </scene>
     </scenes>
     <resources>
