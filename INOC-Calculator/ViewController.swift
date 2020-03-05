@@ -231,8 +231,10 @@ class ViewController: UIViewController {
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
         //        prevent crashing if there is no number after an operator
-        
-        if lastNumber == "" {
+        let numberOfleftBrackets =  calculationString.components(separatedBy:"(")
+        let numberOfrightBrackets =  calculationString.components(separatedBy:")")
+
+        if lastNumber == "" || (numberOfleftBrackets != numberOfrightBrackets) {
             resultLabel.text = "Error"
             clearText()
             calculationString = ""
