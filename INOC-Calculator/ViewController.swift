@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     //END OF FELIX CODE
     
     
-    
+    //START OF ANITA CODE
     
 //    last digit that was pressed
     var lastDigit = ""
@@ -83,8 +83,6 @@ class ViewController: UIViewController {
     var currentOperator = ""
     
     var calculationString = ""
-    
-    var previousCalculation = ""
     
     var result = 0.0
 //    the number that should be toggled with positive or negative sign
@@ -112,8 +110,8 @@ class ViewController: UIViewController {
             if lastNumber == "" {
             lastNumber = calculationString
         }
+//              remove the last number, change the sign of the number and put it back
             removeLastNumber()
-//            change the sign of the number and put it back
             toggledNumber = String(Double(-1) * Double(lastNumber)!)
             lastNumber = toggledNumber
             calculationString += lastNumber
@@ -129,6 +127,7 @@ class ViewController: UIViewController {
                         calculationString.removeLast()
                     }
     }
+    //END OF ANITA CODE
     
     //START FELIX CODE
     
@@ -149,8 +148,10 @@ class ViewController: UIViewController {
     
     //END FELIX CODE
     
+    //START OF ANITA CODE
+    
     @IBAction func percentageButtonClicked(_ sender: UIButton){
-
+//          If there is only one number to calculate it should be just devided by 100
             if calculationString != "" {
                 if currentOperator == "=" || currentOperator == "" {
                     calculationString = String(Double(calculationString)! / 100)
@@ -159,20 +160,20 @@ class ViewController: UIViewController {
                 else if currentOperator != "" {
                     convertToDouble()
                      showCalculation(of: calculationString + "%")
-
+//              remove last number and operator to calculate it into % and then put it back in the string
                     removeLastNumber()
                     calculationString.removeLast()
                      calculateString()
                      let percentage = result * Double(lastNumber)! / 100
                      calculationString += currentOperator
                     calculationString += String(percentage)
-                    print("S \(calculationString)")
                      currentOperator = "%"
                  }
         }
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
+//        if there was a finished calculation then the string will be reset
         if currentOperator == "=" {
             calculationString = ""
             currentOperator = ""
@@ -204,8 +205,9 @@ class ViewController: UIViewController {
        
         if calculationString != ""  {
             if currentOperator == ")" {
-               
+//               This is to prevent the next else if function to exceute when ")" was before
             }
+//                replace the old operator, preventing two operators to be next to each other
             else if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/" {
                 calculationString.removeLast()
             }
@@ -214,13 +216,12 @@ class ViewController: UIViewController {
             }
             currentOperator = "\(sender.currentTitle!)"
             calculationString += currentOperator
-            print(calculationString)
             showCalculation(of: calculationString)
             
             clearText()
-            
         }
     }
+//    convert the number in the string to Doubles
     func convertToDouble() {
 
         removeLastNumber()
@@ -230,10 +231,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
-        //        prevent crashing if there is no number after an operator
         let numberOfleftBrackets =  calculationString.components(separatedBy:"(")
         let numberOfrightBrackets =  calculationString.components(separatedBy:")")
-
+ //        prevent crashing if there is no number after an operator or if the brackets are put in wrong
         if lastNumber == "" || (numberOfleftBrackets != numberOfrightBrackets) {
             resultLabel.text = "Error"
             clearText()
@@ -243,11 +243,11 @@ class ViewController: UIViewController {
 //            if currentOperator != "%" { convertToDouble() }
             currentOperator = "="
            calculateString()
+            
+            addItemToHistory(calculationString: calculationString, resultString: "=\(result)")
             calculationString += currentOperator
             calculationString += "\(result)"
             showCalculation(of: calculationString)
-            //        to store the calculation String for the History before it will be deleted:
-            previousCalculation = calculationString
             //            After calculation there should only be the result in the string
             calculationString = "\(result)"
             clearText()
@@ -285,12 +285,12 @@ class ViewController: UIViewController {
         calculationString += lastDigit
     }
     
-    //    This function clears the text on the Label and enables the decimal BUtton
+    //    This function clears the text on the Label and enables the decimal Button
     func clearText() {
         lastDigit = ""
         lastNumber = ""
     }
-
+// This function is to show the input on the screen without .0
     func showCalculation(of string: String) {
         let replaced = string.replacingOccurrences(of: "x", with: "·")
         var filtered = replaced.replacingOccurrences(
@@ -303,7 +303,7 @@ class ViewController: UIViewController {
                 
         resultLabel.text = filtered
     }
-   
+   //END OF ANITA CODE
     
     @IBAction func Power2(_ sender: SideDrawerButton) {
         let value = Double(lastNumber)
@@ -745,13 +745,17 @@ extension NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
     }
 }
+
+//END FELIX CODE
+
+//START OF ANITA CODE
+//This extemsion is to be able to round numbers 
 extension Double {
        func rounded(toPlaces places:Int) -> Double {
            let divisor = pow(10.0, Double(places))
            return (self * divisor).rounded() / divisor
        }
    }
+//END OF ANITA CODE
 
 
-
-//END FELIX CODE
