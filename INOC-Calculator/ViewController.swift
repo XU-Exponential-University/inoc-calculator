@@ -345,7 +345,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func RandomNumberGen(_ sender: SideDrawerButton) {
-    switch lastDigit {
+    switch lastDigit // because its based on the last digit of a number, it doesnt matter what you type in, it wont crash
+        {
         case "0":
             calculationString = "\(drand48())"
             // randomized a number between 0 and 1, with a limited number of signifcant figures
@@ -394,7 +395,7 @@ class ViewController: UIViewController {
     func powerFunction(value: Double, power: Double) -> Double {
         return pow(value, power)
     }
-    
+    //log base 2 function (once again works only on the last number you entered to prevent mistaken input, and hence errors
     @IBAction func LogBase2(_ sender: Any) {
     let value = Double(lastNumber)
         lastNumber = "\(logBase2(valueOfLog: value ?? 0))"
@@ -402,7 +403,7 @@ class ViewController: UIViewController {
     calculationString += lastNumber
     resultLabel.text = calculationString
     }
-    
+    //log base 10 function
     @IBAction func LogBase10(_ sender: SideDrawerButton) {
                let value = Double(lastNumber)
         lastNumber = "\(logBase10(valueOfLog: value ?? 0))"
@@ -411,11 +412,13 @@ class ViewController: UIViewController {
                resultLabel.text = calculationString
         
     }
-    
+    // square root function (once again only takes the sqrt of the last number)
     @IBAction func SquareRoot(_ sender: SideDrawerButton) {
           let value = Double(lastNumber)
           lastNumber = "\(sqrt(value ?? 0))"
-          calculationString = ""
+        //it deletes all the information in the string before, and outputs your answer, to avoid clattering
+        // i've considered replacing the last number with the result of this function, but in my view that just makes it to comples, as you dont always know whether you've done an error or not
+        calculationString = ""
           calculationString += lastNumber
           resultLabel.text = calculationString
     }

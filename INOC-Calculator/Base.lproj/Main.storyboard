@@ -296,14 +296,14 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="headTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fbB-Zv-CrA">
-                                                            <rect key="frame" x="32" y="15.999999999999996" width="330" height="38.666666666666657"/>
+                                                            <rect key="frame" x="32" y="16" width="330" height="36"/>
                                                             <color key="tintColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <state key="normal">
                                                                 <attributedString key="attributedTitle">
                                                                     <fragment content="12+14+14-20">
                                                                         <attributes>
                                                                             <color key="NSColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            <font key="NSFont" size="20" name="Exo-Regular"/>
+                                                                            <font key="NSFont" metaFont="system" size="20"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -314,13 +314,13 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IiJ-gF-Xl3">
-                                                            <rect key="frame" x="12" y="57.666666666666657" width="350" height="49.333333333333343"/>
+                                                            <rect key="frame" x="12" y="55" width="350" height="45.333333333333343"/>
                                                             <state key="normal">
                                                                 <attributedString key="attributedTitle">
                                                                     <fragment content="=42">
                                                                         <attributes>
                                                                             <color key="NSColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            <font key="NSFont" size="28" name="Exo-SemiBold"/>
+                                                                            <font key="NSFont" metaFont="system" size="28"/>
                                                                             <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                         </attributes>
                                                                     </fragment>
@@ -430,7 +430,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="xR4-Y3-blW" secondAttribute="height" multiplier="1:1" id="QLO-Gy-2sF"/>
                                                         </constraints>
-                                                        <state key="normal" title="ln"/>
+                                                        <state key="normal" title=" log2"/>
                                                         <connections>
                                                             <action selector="LogBase2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="00e-Rg-V1z"/>
                                                         </connections>
@@ -440,7 +440,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6ez-Eh-neY" secondAttribute="height" multiplier="1:1" id="Zcr-LB-BUA"/>
                                                         </constraints>
-                                                        <state key="normal" title="log"/>
+                                                        <state key="normal" title="log10"/>
                                                         <connections>
                                                             <action selector="LogBase10:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VEn-Cu-zA3"/>
                                                         </connections>
