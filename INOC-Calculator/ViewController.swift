@@ -11,6 +11,8 @@ import Foundation
 
 class ViewController: UIViewController {
     
+    //START OF FELIX CODE
+    
     /*
      UI Variables
      */
@@ -46,10 +48,6 @@ class ViewController: UIViewController {
     //maximum amounts of points the top card can be dragged
     var maxDraggablePointsSideDrawer: CGFloat = 0.0
     
-    
-    
-    
-    
     /*
      Logic Variables
      */
@@ -65,6 +63,16 @@ class ViewController: UIViewController {
     
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
+    
+    var history: [Calculation] = [Calculation.init(calculation: "12+13", result: "=25"),
+    Calculation.init(calculation: "14-3", result: "=11"),
+    Calculation.init(calculation: "22x3", result: "=66"),
+    Calculation.init(calculation: "1000+12+12-3", result: "=1024")]
+    
+    @IBOutlet weak var historyTable: UITableView!
+    
+    //END OF FELIX CODE
+    
 //    last digit that was pressed
     var lastDigit = ""
 //   last number (which later piles up from the digits)
@@ -79,6 +87,7 @@ class ViewController: UIViewController {
     var result = 0.0
 //    the number that should be toggled with positive or negative sign
     var toggledNumber = ""
+    
     
     @IBOutlet weak var resultLabel: UILabel!
     
@@ -504,6 +513,7 @@ class ViewController: UIViewController {
         //setting size of leading constraint for sideDrawer
         sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer
         
+        historyTable.transform = CGAffineTransform(rotationAngle: -.pi);
     }
     
     @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
@@ -675,6 +685,24 @@ extension UIView {
     func roundCorners(cornerRadius: Double) {
         self.layer.cornerRadius = CGFloat(cornerRadius)
         self.clipsToBounds = true
+    }
+    
+}
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return history.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let historyCell = historyTable.dequeueReusableCell(withIdentifier: "CalculationHistoryCell") as! CalculationHistoryCell
+        
+        historyCell.setText(calculation: history[indexPath.row]);
+        historyCell.transform = CGAffineTransform(rotationAngle: .pi);
+        
+        return historyCell
     }
     
 }

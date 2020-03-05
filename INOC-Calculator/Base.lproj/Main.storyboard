@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,6 +11,12 @@
         <array key="Exo-Medium.ttf">
             <string>Exo-Medium</string>
         </array>
+        <array key="Exo-Regular.ttf">
+            <string>Exo-Regular</string>
+        </array>
+        <array key="Exo-SemiBold.ttf">
+            <string>Exo-SemiBold</string>
+        </array>
     </customFonts>
     <scenes>
         <!--View Controller-->
@@ -18,20 +24,20 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="INOC_Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-5A-LlZ" userLabel="bottom area">
-                                <rect key="frame" x="0.0" y="282.66666666666674" width="375" height="495.33333333333326"/>
+                                <rect key="frame" x="0.0" y="315.33333333333331" width="414" height="546.66666666666674"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C92-8P-fZp" userLabel="numpad">
-                                        <rect key="frame" x="30" y="35" width="315" height="430.33333333333331"/>
+                                        <rect key="frame" x="30" y="35.000000000000028" width="354" height="481.66666666666674"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QnG-He-XXo" userLabel="top operator row">
-                                                <rect key="frame" x="0.0" y="0.0" width="315" height="60.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="67.666666666666671"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lql-Pp-LRo" customClass="OperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="60.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="67.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Lql-Pp-LRo" secondAttribute="height" multiplier="1:1" id="vL4-pc-dxl"/>
                                                         </constraints>
@@ -41,7 +47,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-Fu-ROJ" customClass="OperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="85" y="0.0" width="60" height="60.333333333333336"/>
+                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="1JD-Fu-ROJ" secondAttribute="height" multiplier="1:1" id="KoK-MR-PZR"/>
                                                         </constraints>
@@ -52,7 +58,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gd5-39-f4b" customClass="OperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="170" y="0.0" width="60" height="60.333333333333336"/>
+                                                        <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="gd5-39-f4b" secondAttribute="height" multiplier="1:1" id="2N0-1A-ANg"/>
                                                         </constraints>
@@ -62,7 +68,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E2-TL-TMC" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator">
-                                                        <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60.333333333333336"/>
+                                                        <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6E2-TL-TMC" secondAttribute="height" multiplier="1:1" id="Uc3-Qu-pzP"/>
                                                         </constraints>
@@ -75,10 +81,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wuv-PY-Bzo" userLabel="row 7">
-                                                <rect key="frame" x="0.0" y="92.666666666666629" width="315" height="60"/>
+                                                <rect key="frame" x="0.0" y="103.66666666666669" width="354" height="67.333333333333314"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nm-52-uDQ" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6Nm-52-uDQ" secondAttribute="height" multiplier="1:1" id="NsS-WA-wB9"/>
                                                         </constraints>
@@ -88,7 +94,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkl-EM-91o" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="85" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="wkl-EM-91o" secondAttribute="height" multiplier="1:1" id="wHJ-6G-nLR"/>
                                                         </constraints>
@@ -98,7 +104,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7u6-78-AV5" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="170" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="7u6-78-AV5" secondAttribute="height" multiplier="1:1" id="cuB-Fm-Kld"/>
                                                         </constraints>
@@ -108,7 +114,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ech-3v-o2w" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60"/>
+                                                        <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ech-3v-o2w" secondAttribute="height" multiplier="1:1" id="qlf-o0-yZm"/>
                                                         </constraints>
@@ -120,10 +126,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3wh-D9-Dug" userLabel="row 4">
-                                                <rect key="frame" x="0.0" y="185" width="315" height="60.333333333333343"/>
+                                                <rect key="frame" x="0.0" y="207.33333333333331" width="354" height="67.333333333333314"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0p-Zx-bFo" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="60.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="T0p-Zx-bFo" secondAttribute="height" multiplier="1:1" id="xgC-cg-4gs"/>
                                                         </constraints>
@@ -134,7 +140,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bg6-vL-wLp" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="85" y="0.0" width="60" height="60.333333333333336"/>
+                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Bg6-vL-wLp" secondAttribute="height" multiplier="1:1" id="wY6-pu-MzW"/>
                                                         </constraints>
@@ -144,7 +150,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="67F-H9-ENQ" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="170" y="0.0" width="60" height="60.333333333333336"/>
+                                                        <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="67F-H9-ENQ" secondAttribute="height" multiplier="1:1" id="t3o-hy-iNF"/>
                                                         </constraints>
@@ -155,7 +161,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj8-r3-3Ge" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60.333333333333336"/>
+                                                        <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Kj8-r3-3Ge" secondAttribute="height" multiplier="1:1" id="djv-pX-SdR"/>
                                                         </constraints>
@@ -168,10 +174,10 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ddX-Sz-eW1" userLabel="row 1">
-                                                <rect key="frame" x="0.0" y="277.66666666666669" width="315" height="60"/>
+                                                <rect key="frame" x="0.0" y="310.66666666666669" width="354" height="67.333333333333314"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6N-bx-8hk" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="60"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="67.333333333333329" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="C6N-bx-8hk" secondAttribute="height" multiplier="1:1" id="pfd-Qu-877"/>
                                                         </constraints>
@@ -181,7 +187,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yat-Yd-xnB" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="85" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="95.666666666666686" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="yat-Yd-xnB" secondAttribute="height" multiplier="1:1" id="iY3-EL-KdE"/>
                                                         </constraints>
@@ -191,7 +197,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1D-Lv-Kg6" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="170" y="0.0" width="60" height="60"/>
+                                                        <rect key="frame" x="191" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Q1D-Lv-Kg6" secondAttribute="height" multiplier="1:1" id="7po-9e-4v0"/>
                                                         </constraints>
@@ -201,7 +207,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teK-zN-rH4" customClass="ImportantOperatorButtonMainScreen" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60"/>
+                                                        <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="teK-zN-rH4" secondAttribute="height" multiplier="1:1" id="hYE-vN-WkQ"/>
                                                         </constraints>
@@ -216,24 +222,24 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="zZM-7l-5J2" userLabel="row 0">
-                                                <rect key="frame" x="0.0" y="369.99999999999994" width="315" height="60.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="414.33333333333331" width="354" height="67.333333333333314"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTF-4E-Q7y" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="159.66666666666666" height="60.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="178.66666666666666" height="67.333333333333329"/>
                                                         <state key="normal" title="0"/>
                                                         <connections>
                                                             <action selector="numberZeroButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QCi-ka-M49"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QBQ-zJ-ts9" customClass="NumberPadButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="177" y="0.0" width="60.333333333333343" height="60.333333333333336"/>
+                                                        <rect key="frame" x="199" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <state key="normal" title="."/>
                                                         <connections>
                                                             <action selector="decimalButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="99i-xW-7uF"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hO-Kq-ICo" customClass="ResultButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="254.66666666666671" y="0.0" width="60.333333333333343" height="60.333333333333336"/>
+                                                        <rect key="frame" x="286.66666666666669" y="0.0" width="67.333333333333314" height="67.333333333333329"/>
                                                         <color key="backgroundColor" red="0.96470588239999999" green="0.30588235289999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="2hO-Kq-ICo" secondAttribute="height" multiplier="1:1" id="960-Eg-CCD"/>
@@ -269,24 +275,68 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Em-il-Gjh" userLabel="top area">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="282.66666666666669"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="315.33333333333331"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_card_drag_down_handle" translatesAutoresizingMaskIntoConstraints="NO" id="J3d-Gu-eiH">
-                                        <rect key="frame" x="167.66666666666666" y="262.66666666666669" width="40" height="4"/>
+                                        <rect key="frame" x="187" y="295.33333333333331" width="40" height="4"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="4" id="Yoe-6P-YV2"/>
                                             <constraint firstAttribute="width" constant="40" id="hQy-MQ-5nM"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-y9-GHj">
-                                        <rect key="frame" x="30" y="148.66666666666666" width="315" height="80"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="bNY-y9-GHj">
+                                        <rect key="frame" x="30" y="181.33333333333334" width="354" height="80.000000000000028"/>
                                         <fontDescription key="fontDescription" name="Exo-Medium" family="Exo" pointSize="60"/>
                                         <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgk-6z-Lx0">
-                                        <rect key="frame" x="20" y="52.000000000000007" width="335" height="86.666666666666686"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hgk-6z-Lx0">
+                                        <rect key="frame" x="20" y="51.999999999999993" width="374" height="119.33333333333331"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CalculationHistoryCell" id="xeG-Xy-zHS" customClass="CalculationHistoryCell" customModule="INOC_Calculator" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="374" height="80"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xeG-Xy-zHS" id="lzw-kY-pI2">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12+13+16-9" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBr-ex-df6" userLabel="calculation">
+                                                            <rect key="frame" x="32" y="21" width="310" height="29.333333333333329"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <accessibilityTraits key="traits" staticText="YES" allowsDirectInteraction="YES"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="22"/>
+                                                            <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="=10" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hg-wy-QXT" userLabel="result">
+                                                            <rect key="frame" x="32" y="57.333333333333336" width="310" height="25.333333333333336"/>
+                                                            <fontDescription key="fontDescription" name="Exo-SemiBold" family="Exo" pointSize="19"/>
+                                                            <color key="textColor" red="0.12549019610000001" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="1hg-wy-QXT" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leadingMargin" constant="12" id="1Xc-g9-Y61"/>
+                                                        <constraint firstItem="1hg-wy-QXT" firstAttribute="top" secondItem="QBr-ex-df6" secondAttribute="bottom" constant="7" id="BiL-eL-wee"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="1hg-wy-QXT" secondAttribute="trailing" constant="12" id="Fql-UR-zpO"/>
+                                                        <constraint firstItem="QBr-ex-df6" firstAttribute="leading" secondItem="lzw-kY-pI2" secondAttribute="leadingMargin" constant="12" id="bLs-dN-JN4"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="QBr-ex-df6" secondAttribute="trailing" constant="12" id="gTe-Sv-obK"/>
+                                                        <constraint firstItem="QBr-ex-df6" firstAttribute="top" secondItem="lzw-kY-pI2" secondAttribute="topMargin" constant="10" id="oFj-rQ-dvk"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="calculationLabel" destination="QBr-ex-df6" id="a4t-jV-vcR"/>
+                                                    <outlet property="resultLabel" destination="1hg-wy-QXT" id="9R6-pb-Fbr"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="gME-G4-0iV"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="JeS-ba-2mH"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588235294119" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -303,16 +353,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aL-eK-LDG" userLabel="side drawer">
-                                <rect key="frame" x="0.0" y="406.66666666666674" width="400" height="371.33333333333326"/>
+                                <rect key="frame" x="-400" y="452" width="400" height="410"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Eu-y5-LcE">
-                                        <rect key="frame" x="20" y="25" width="360" height="321.33333333333331"/>
+                                        <rect key="frame" x="20" y="25" width="360" height="360"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="fHA-jz-3Ki">
-                                                <rect key="frame" x="0.0" y="0.0" width="360" height="54.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="360" height="61.333333333333336"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oU-DE-oqz" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="54.333333333333336"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="0oU-DE-oqz" secondAttribute="height" multiplier="1:1" id="ULZ-PW-Aal"/>
                                                         </constraints>
@@ -322,7 +372,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3V-J5-cYt" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.333333333333336"/>
+                                                        <rect key="frame" x="149.33333333333334" y="0.0" width="61.333333333333343" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="I3V-J5-cYt" secondAttribute="height" multiplier="1:1" id="bSd-2w-RGG"/>
                                                         </constraints>
@@ -332,7 +382,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gG3-3w-znT" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.333333333333336"/>
+                                                        <rect key="frame" x="298.66666666666669" y="0.0" width="61.333333333333314" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="gG3-3w-znT" secondAttribute="height" multiplier="1:1" id="ZFv-fc-xp8"/>
                                                         </constraints>
@@ -349,10 +399,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="bP3-71-r2R">
-                                                <rect key="frame" x="0.0" y="88.666666666666686" width="360" height="54.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="99.666666666666615" width="360" height="61.333333333333329"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMs-Jl-Hl2" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="54.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vMs-Jl-Hl2" secondAttribute="height" multiplier="1:1" id="sTE-Ia-GuL"/>
                                                         </constraints>
@@ -362,7 +412,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xR4-Y3-blW" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
+                                                        <rect key="frame" x="149.33333333333334" y="0.0" width="61.333333333333343" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="xR4-Y3-blW" secondAttribute="height" multiplier="1:1" id="QLO-Gy-2sF"/>
                                                         </constraints>
@@ -372,7 +422,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-Eh-neY" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
+                                                        <rect key="frame" x="298.66666666666669" y="0.0" width="61.333333333333314" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="6ez-Eh-neY" secondAttribute="height" multiplier="1:1" id="Zcr-LB-BUA"/>
                                                         </constraints>
@@ -389,10 +439,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="R6V-Mq-3U5">
-                                                <rect key="frame" x="0.0" y="177.66666666666669" width="360" height="54.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="199.33333333333337" width="360" height="61"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ywC-4Z-An5" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="54.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="61"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="ywC-4Z-An5" secondAttribute="height" multiplier="1:1" id="3BG-rY-3Vc"/>
                                                         </constraints>
@@ -402,7 +452,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baF-7J-Pfc" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
+                                                        <rect key="frame" x="149.33333333333334" y="0.0" width="61.333333333333343" height="61"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="baF-7J-Pfc" secondAttribute="height" multiplier="1:1" id="nNc-Yw-1cl"/>
                                                         </constraints>
@@ -412,7 +462,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHS-MR-GKH" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
+                                                        <rect key="frame" x="298.66666666666669" y="0.0" width="61.333333333333314" height="61"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="nHS-MR-GKH" secondAttribute="height" multiplier="1:1" id="e4g-XQ-E4n"/>
                                                         </constraints>
@@ -429,10 +479,10 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="vh5-Aa-Clq">
-                                                <rect key="frame" x="0.0" y="266.66666666666669" width="360" height="54.666666666666686"/>
+                                                <rect key="frame" x="0.0" y="298.66666666666663" width="360" height="61.333333333333314"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izk-4x-blL" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="54.666666666666664"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="izk-4x-blL" secondAttribute="height" multiplier="1:1" id="oof-Yd-aO2"/>
                                                         </constraints>
@@ -442,7 +492,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUD-fo-vGS" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="152.66666666666666" y="0.0" width="54.666666666666657" height="54.666666666666664"/>
+                                                        <rect key="frame" x="149.33333333333334" y="0.0" width="61.333333333333343" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="jUD-fo-vGS" secondAttribute="height" multiplier="1:1" id="DtD-td-jJg"/>
                                                         </constraints>
@@ -452,7 +502,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGJ-zq-xXj" customClass="SideDrawerButton" customModule="INOC_Calculator" customModuleProvider="target">
-                                                        <rect key="frame" x="305.33333333333331" y="0.0" width="54.666666666666686" height="54.666666666666664"/>
+                                                        <rect key="frame" x="298.66666666666669" y="0.0" width="61.333333333333314" height="61.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="WGJ-zq-xXj" secondAttribute="height" multiplier="1:1" id="bcJ-Vz-0ug"/>
                                                         </constraints>
@@ -493,18 +543,19 @@
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8rp-PI-Ijl"/>
                             <constraint firstItem="3Em-il-Gjh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="A0X-cX-hm8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cVf-5A-LlZ" secondAttribute="bottom" id="ERn-Gd-SDt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="9aL-eK-LDG" secondAttribute="trailing" constant="-400" id="G5f-Iq-CWe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="9aL-eK-LDG" secondAttribute="trailing" id="G5f-Iq-CWe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cVf-5A-LlZ" secondAttribute="trailing" id="NLs-oZ-OUf"/>
                             <constraint firstItem="9aL-eK-LDG" firstAttribute="height" secondItem="cVf-5A-LlZ" secondAttribute="height" multiplier="0.75" id="hyL-gH-e20"/>
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="top" secondItem="3Em-il-Gjh" secondAttribute="bottom" id="y1c-EV-CWl"/>
                             <constraint firstItem="cVf-5A-LlZ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.61" id="yHf-dN-pEy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9aL-eK-LDG" secondAttribute="bottom" id="yMt-1n-PVi"/>
-                            <constraint firstItem="9aL-eK-LDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zMf-Ch-DLc"/>
+                            <constraint firstItem="9aL-eK-LDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-400" id="zMf-Ch-DLc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="decimalButton" destination="QBQ-zJ-ts9" id="2F1-0G-sJH"/>
+                        <outlet property="historyTable" destination="hgk-6z-Lx0" id="dcG-hz-VwH"/>
                         <outlet property="resultButton" destination="2hO-Kq-ICo" id="DNv-Mi-kUi"/>
                         <outlet property="resultLabel" destination="bNY-y9-GHj" id="iLr-tz-dfO"/>
                         <outlet property="sideDrawer" destination="9aL-eK-LDG" id="LSd-QC-Krj"/>
