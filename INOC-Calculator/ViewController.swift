@@ -64,11 +64,10 @@ class ViewController: UIViewController {
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
     
-    var history: [Calculation] = [Calculation.init(calculation: "12+13", result: "=25"),
-    Calculation.init(calculation: "14-3", result: "=11"),
-    Calculation.init(calculation: "22x3", result: "=66"),
-    Calculation.init(calculation: "1000+12+12-3", result: "=1024")]
+    //this keeps track of all calculations being made
+    var history: [Calculation] = []
     
+    //outlet of the history, needed for further setup
     @IBOutlet weak var historyTable: UITableView!
     
     //END OF FELIX CODE
@@ -135,14 +134,17 @@ class ViewController: UIViewController {
     
     //TODO get text from the history and make the calculation work afterwards
     @IBAction func getTextFromHistory(_ sender: UIButton) {
-        var historyString = sender.attributedTitle(for: .normal)?.string as! NSString
-        let histroyStringRealString = historyString.replacingOccurrences(of: "=", with: "")
-        print(type(of: histroyStringRealString))
-        print(histroyStringRealString)
-        if(sender.tag == 1002){
-            lastNumber = histroyStringRealString
-        }
-        showCalculation(of: histroyStringRealString)
+        var historyString = sender.attributedTitle(for: .normal)?.string
+        historyString = historyString!.replacingOccurrences(of: "=", with: "")
+        
+        showCalculation(of: historyString!)
+    }
+    
+    
+    //adds item to the history array and refreshes table
+    func addItemToHistory(calculationString: String, resultString: String){
+        history.insert(Calculation(calculation: calculationString, result: resultString), at: 0)
+        self.historyTable.reloadData()
     }
     
     //END FELIX CODE
@@ -296,6 +298,8 @@ class ViewController: UIViewController {
         )
         filtered = filtered.replacingOccurrences(of: "·", with: "x")
         filtered = filtered.replacingOccurrences(of: "*", with: "x")
+        
+        addItemToHistory(calculationString: filtered, resultString: filtered)
         
         resultLabel.text = filtered
     }
@@ -496,6 +500,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -718,10 +723,12 @@ extension UIView {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     
+    //returning amount of rows needed
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return history.count
     }
     
+    //returning table cell to display
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let historyCell = historyTable.dequeueReusableCell(withIdentifier: "CalculationHistoryCell") as! CalculationHistoryCell
