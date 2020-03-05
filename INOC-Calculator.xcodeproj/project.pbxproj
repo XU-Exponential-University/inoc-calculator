@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261608223D6ED5600FA58DE /* inocDocumentation.swift */; };
 		C28C6EBB23D7535D0057668D /* Exo-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EA923D7535B0057668D /* Exo-ExtraLightItalic.ttf */; };
 		C28C6EBC23D7535D0057668D /* Exo-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAA23D7535B0057668D /* Exo-LightItalic.ttf */; };
 		C28C6EBD23D7535D0057668D /* Exo-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C28C6EAB23D7535B0057668D /* Exo-ExtraBold.ttf */; };
@@ -38,6 +37,8 @@
 		C2CBF35223CF22AD0089D758 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2CBF35023CF22AD0089D758 /* LaunchScreen.storyboard */; };
 		C2CBF35D23CF22AD0089D758 /* INOC_CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF35C23CF22AD0089D758 /* INOC_CalculatorTests.swift */; };
 		C2CBF36823CF22AD0089D758 /* INOC_CalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CBF36723CF22AD0089D758 /* INOC_CalculatorUITests.swift */; };
+		C2D992472410F21C0007B338 /* CalculationHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D992462410F21C0007B338 /* CalculationHistoryCell.swift */; };
+		C2D992492410F7020007B338 /* Calculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2D992482410F7020007B338 /* Calculation.swift */; };
 		C2F7011D23D86393000809EB /* ImportantOperatorButtonMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F7011C23D86393000809EB /* ImportantOperatorButtonMainScreen.swift */; };
 		C2F7012123D864C0000809EB /* OperatorButtonMainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F7012023D864C0000809EB /* OperatorButtonMainScreen.swift */; };
 /* End PBXBuildFile section */
@@ -60,7 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C261608223D6ED5600FA58DE /* inocDocumentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = inocDocumentation.swift; sourceTree = "<group>"; };
 		C28C6EA923D7535B0057668D /* Exo-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
 		C28C6EAA23D7535B0057668D /* Exo-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-LightItalic.ttf"; sourceTree = "<group>"; };
 		C28C6EAB23D7535B0057668D /* Exo-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -97,6 +97,8 @@
 		C2CBF36323CF22AD0089D758 /* INOC-CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "INOC-CalculatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2CBF36723CF22AD0089D758 /* INOC_CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INOC_CalculatorUITests.swift; sourceTree = "<group>"; };
 		C2CBF36923CF22AD0089D758 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2D992462410F21C0007B338 /* CalculationHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationHistoryCell.swift; sourceTree = "<group>"; };
+		C2D992482410F7020007B338 /* Calculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculation.swift; sourceTree = "<group>"; };
 		C2F7011C23D86393000809EB /* ImportantOperatorButtonMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantOperatorButtonMainScreen.swift; sourceTree = "<group>"; };
 		C2F7012023D864C0000809EB /* OperatorButtonMainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorButtonMainScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,7 +190,8 @@
 				C2CBF35023CF22AD0089D758 /* LaunchScreen.storyboard */,
 				C2CBF35323CF22AD0089D758 /* Info.plist */,
 				C2CBF34B23CF229C0089D758 /* INOC_Calculator.xcdatamodeld */,
-				C261608223D6ED5600FA58DE /* inocDocumentation.swift */,
+				C2D992462410F21C0007B338 /* CalculationHistoryCell.swift */,
+				C2D992482410F7020007B338 /* Calculation.swift */,
 			);
 			path = "INOC-Calculator";
 			sourceTree = "<group>";
@@ -361,15 +364,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2F7012123D864C0000809EB /* OperatorButtonMainScreen.swift in Sources */,
+				C2D992472410F21C0007B338 /* CalculationHistoryCell.swift in Sources */,
 				C2F7011D23D86393000809EB /* ImportantOperatorButtonMainScreen.swift in Sources */,
 				C2CBF34723CF229C0089D758 /* ViewController.swift in Sources */,
 				C2CBF34323CF229C0089D758 /* AppDelegate.swift in Sources */,
 				C28C6ECE23D755700057668D /* NumberPadButton.swift in Sources */,
 				C2CBF34D23CF229C0089D758 /* INOC_Calculator.xcdatamodeld in Sources */,
+				C2D992492410F7020007B338 /* Calculation.swift in Sources */,
 				C2CBF34523CF229C0089D758 /* SceneDelegate.swift in Sources */,
 				C2ABCA9723E19CFD000273E4 /* SideDrawerButton.swift in Sources */,
 				C2ABCA9523E1999C000273E4 /* ResultButton.swift in Sources */,
-				C261608323D6ED5700FA58DE /* inocDocumentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

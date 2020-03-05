@@ -11,6 +11,8 @@ import Foundation
 
 class ViewController: UIViewController {
     
+    //START OF FELIX CODE
+    
     /*
      UI Variables
      */
@@ -46,10 +48,6 @@ class ViewController: UIViewController {
     //maximum amounts of points the top card can be dragged
     var maxDraggablePointsSideDrawer: CGFloat = 0.0
     
-    
-    
-    
-    
     /*
      Logic Variables
      */
@@ -65,6 +63,18 @@ class ViewController: UIViewController {
     
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
+    
+    //this keeps track of all calculations being made
+    var history: [Calculation] = []
+    
+    //outlet of the history, needed for further setup
+    @IBOutlet weak var historyTable: UITableView!
+    
+    //END OF FELIX CODE
+    
+    
+    
+    
 //    last digit that was pressed
     var lastDigit = ""
 //   last number (which later piles up from the digits)
@@ -79,6 +89,7 @@ class ViewController: UIViewController {
     var result = 0.0
 //    the number that should be toggled with positive or negative sign
     var toggledNumber = ""
+    
     
     @IBOutlet weak var resultLabel: UILabel!
     
@@ -118,6 +129,25 @@ class ViewController: UIViewController {
                         calculationString.removeLast()
                     }
     }
+    
+    //START FELIX CODE
+    
+    //TODO get text from the history and make the calculation work afterwards
+    @IBAction func getTextFromHistory(_ sender: UIButton) {
+        var historyString = sender.attributedTitle(for: .normal)?.string
+        historyString = historyString!.replacingOccurrences(of: "=", with: "")
+        
+        showCalculation(of: historyString!)
+    }
+    
+    
+    //adds item to the history array and refreshes table
+    func addItemToHistory(calculationString: String, resultString: String){
+        history.insert(Calculation(calculation: calculationString, result: resultString), at: 0)
+        self.historyTable.reloadData()
+    }
+    
+    //END FELIX CODE
     
     @IBAction func percentageButtonClicked(_ sender: UIButton){
 
@@ -222,6 +252,7 @@ class ViewController: UIViewController {
             
         }
     }
+    
     func calculateString() {
         //            replacing x to * so it can calculate
              calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
@@ -245,6 +276,7 @@ class ViewController: UIViewController {
         showCalculation(of: calculationString)
 
     }
+    
     func getLastDigitAndNumber(button: UIButton) {
         lastDigit = button.currentTitle!
         lastNumber += lastDigit
@@ -266,6 +298,8 @@ class ViewController: UIViewController {
         )
         filtered = filtered.replacingOccurrences(of: "·", with: "x")
         filtered = filtered.replacingOccurrences(of: "*", with: "x")
+        
+        addItemToHistory(calculationString: filtered, resultString: filtered)
         
         resultLabel.text = filtered
     }
@@ -458,8 +492,15 @@ class ViewController: UIViewController {
 
     
     
+    
+    
+    
+    //FELIX CODE START
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
@@ -504,6 +545,7 @@ class ViewController: UIViewController {
         //setting size of leading constraint for sideDrawer
         sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer
         
+        historyTable.transform = CGAffineTransform(rotationAngle: -.pi);
     }
     
     @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
@@ -679,6 +721,25 @@ extension UIView {
     
 }
 
+extension ViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    //returning amount of rows needed
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return history.count
+    }
+    
+    //returning table cell to display
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let historyCell = historyTable.dequeueReusableCell(withIdentifier: "CalculationHistoryCell") as! CalculationHistoryCell
+        
+        historyCell.setText(calculation: history[indexPath.row]);
+        historyCell.transform = CGAffineTransform(rotationAngle: .pi);
+        
+        return historyCell
+    }
+}
+
 extension NSLayoutConstraint {
     func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
@@ -690,3 +751,7 @@ extension Double {
            return (self * divisor).rounded() / divisor
        }
    }
+
+
+
+//END FELIX CODE
