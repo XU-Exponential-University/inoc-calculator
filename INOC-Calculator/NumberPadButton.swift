@@ -5,6 +5,7 @@
 //  Created by FelixP on 21.01.20.
 //  Copyright © 2020 XU Exponential University. All rights reserved.
 //
+//all of this code was written by the author of the file
 
 import UIKit
 
