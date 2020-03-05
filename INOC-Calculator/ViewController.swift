@@ -298,9 +298,7 @@ class ViewController: UIViewController {
         )
         filtered = filtered.replacingOccurrences(of: "·", with: "x")
         filtered = filtered.replacingOccurrences(of: "*", with: "x")
-        
-        addItemToHistory(calculationString: filtered, resultString: filtered)
-        
+                
         resultLabel.text = filtered
     }
    
