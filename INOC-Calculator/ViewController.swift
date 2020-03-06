@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     //START OF FELIX CODE
     
     /*
-     UI Variables
-     */
+    UI Variables
+    */
     
     //this is the red top card in the UI
     @IBOutlet weak var topCardView: UIView!
@@ -73,6 +73,10 @@ class ViewController: UIViewController {
     //END OF FELIX CODE
     
     
+    
+    
+    
+    
     //START OF ANITA CODE
     
 //    last digit that was pressed
@@ -87,7 +91,6 @@ class ViewController: UIViewController {
     var result = 0.0
 //    the number that should be toggled with positive or negative sign
     var toggledNumber = ""
-    
     
     @IBOutlet weak var resultLabel: UILabel!
     
@@ -127,7 +130,13 @@ class ViewController: UIViewController {
                         calculationString.removeLast()
                     }
     }
+    
     //END OF ANITA CODE
+    
+    
+    
+    
+    
     
     //START FELIX CODE
     
@@ -147,6 +156,10 @@ class ViewController: UIViewController {
     }
     
     //END FELIX CODE
+    
+    
+    
+    
     
     //START OF ANITA CODE
     
@@ -497,10 +510,13 @@ class ViewController: UIViewController {
     }
 
     
-    
-    
-    
     //End of Viktors Code
+    
+    
+    
+    
+    
+    
     //FELIX CODE START
     
     
@@ -746,13 +762,11 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-extension NSLayoutConstraint {
-    func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
-    }
-}
-
 //END FELIX CODE
+
+
+
+
 
 //START OF ANITA CODE
 //This extemsion is to be able to round numbers 
