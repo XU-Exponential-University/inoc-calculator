@@ -217,6 +217,9 @@ class ViewController: UIViewController {
     @IBAction func operatorClicked(_ sender: UIButton){
        
         if calculationString != ""  {
+            if calculationString.last! == "(" {
+                return
+            }
             if currentOperator == ")" {
 //               This is to prevent the next else if function to exceute when ")" was before
             }
@@ -244,8 +247,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
-        let numberOfleftBrackets =  calculationString.components(separatedBy:"(")
-        let numberOfrightBrackets =  calculationString.components(separatedBy:")")
+        let numberOfleftBrackets =  calculationString.components(separatedBy:"(").count-1
+        let numberOfrightBrackets =  calculationString.components(separatedBy:")").count-1
  //        prevent crashing if there is no number after an operator or if the brackets are put in wrong
         if lastNumber == "" || (numberOfleftBrackets != numberOfrightBrackets) {
             resultLabel.text = "Error"
