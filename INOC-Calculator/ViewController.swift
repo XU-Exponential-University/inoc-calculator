@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
     
+    //START OF FELIX CODE
+    
     /*
-     UI Variables
-     */
+    UI Variables
+    */
     
     //this is the red top card in the UI
     @IBOutlet weak var topCardView: UIView!
@@ -36,18 +39,14 @@ class ViewController: UIViewController {
     
     
     
-    
     //constraint of side drawer used to resize
     @IBOutlet weak var sideDrawerTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideDrawerLeadingConstraint: NSLayoutConstraint!
     
     //default value of bottomContraint of top area
     var sideDrawerTrailingConstraintVal: CGFloat = 0.0
     //maximum amounts of points the top card can be dragged
     var maxDraggablePointsSideDrawer: CGFloat = 0.0
-    
-    
-    
-    
     
     /*
      Logic Variables
@@ -65,15 +64,33 @@ class ViewController: UIViewController {
     //current state of the top area
     var sideDrawerState: DrawerState = .normal
     
-    var numberOnScreen = ""
+    //this keeps track of all calculations being made
+    var history: [Calculation] = []
     
+    //outlet of the history, needed for further setup
+    @IBOutlet weak var historyTable: UITableView!
+    
+    //END OF FELIX CODE
+    
+    
+    
+    
+    
+    
+    //START OF ANITA CODE
+    
+//    last digit that was pressed
+    var lastDigit = ""
+//   last number (which later piles up from the digits)
+    var lastNumber = ""
+//    the last operstor that was clicked
     var currentOperator = ""
-    
-    var currentNumber = ""
     
     var calculationString = ""
     
     var result = 0.0
+//    the number that should be toggled with positive or negative sign
+    var toggledNumber = ""
     
     @IBOutlet weak var resultLabel: UILabel!
     
@@ -83,118 +100,436 @@ class ViewController: UIViewController {
     @IBAction func clearButtonClicked(_ sender: Any) {
         
         clearText()
-        currentNumber = ""
+
         currentOperator = ""
         resultLabel.text = "0"
         calculationString = ""
         
-        unblockOperatorButton()
-        previousButton = UIButton()
     }
     
     @IBAction func toggleSignButtonClicked(_ sender: Any){
-        resultLabel.text = String(Double(-1) * Double(numberOnScreen)!)
+//        the function should not execute if there is no number (when first open the app or after clearing)
+        if calculationString != "" {
+            if lastNumber == "" {
+            lastNumber = calculationString
+        }
+//              remove the last number, change the sign of the number and put it back
+            removeLastNumber()
+            toggledNumber = String(Double(-1) * Double(lastNumber)!)
+            lastNumber = toggledNumber
+            calculationString += lastNumber
+             showCalculation(of: calculationString)
+        }
     }
     
+    func removeLastNumber() {
+//          check the length of the last number
+         let stringLength = lastNumber.count
+        //            remove the last number
+                    for _ in 1...stringLength {
+                        calculationString.removeLast()
+                    }
+    }
+    
+    //END OF ANITA CODE
+    
+    
+    
+    
+    
+    
+    //START FELIX CODE
+    
+    //TODO get text from the history and make the calculation work afterwards
+    @IBAction func getTextFromHistory(_ sender: UIButton) {
+        var historyString = sender.attributedTitle(for: .normal)?.string
+        historyString = historyString!.replacingOccurrences(of: "=", with: "")
+        
+        showCalculation(of: historyString!)
+    }
+    
+    
+    //adds item to the history array and refreshes table
+    func addItemToHistory(calculationString: String, resultString: String){
+        history.insert(Calculation(calculation: calculationString, result: resultString), at: 0)
+        self.historyTable.reloadData()
+    }
+    
+    //END FELIX CODE
+    
+    
+    
+    
+    
+    //START OF ANITA CODE
+    
     @IBAction func percentageButtonClicked(_ sender: UIButton){
-        
-        
+//          If there is only one number to calculate it should be just devided by 100
+            if calculationString != "" {
+                if currentOperator == "=" || currentOperator == "" {
+                    calculationString = String(Double(calculationString)! / 100)
+                    showCalculation(of: calculationString)
+                }
+                else if currentOperator != "" {
+                    convertToDouble()
+                     showCalculation(of: calculationString + "%")
+//              remove last number and operator to calculate it into % and then put it back in the string
+                    removeLastNumber()
+                    calculationString.removeLast()
+                     calculateString()
+                     let percentage = result * Double(lastNumber)! / 100
+                     calculationString += currentOperator
+                    calculationString += String(percentage)
+                     currentOperator = "%"
+                 }
+        }
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
-        if resultLabel.text != "0" {
-            numberOnScreen += sender.currentTitle!
+//        if there was a finished calculation then the string will be reset
+        if currentOperator == "=" {
+            calculationString = ""
+            currentOperator = ""
+        }
+//      the function will add a 0 only if the number is not already 0:
+        if lastNumber != "0" {
+            getLastDigitAndNumber(button: sender)
             
-            resultLabel.text = numberOnScreen
+            showCalculation(of: calculationString)
         }
     }
     
     @IBAction func decimalButtonClicked(_ sender: UIButton){
-        decimalButton.isEnabled = false
-        if numberOnScreen == "" {
-            numberOnScreen = "0."
-            resultLabel.text = numberOnScreen
-        }
-        else {
-            numberOnScreen += sender.currentTitle!
+        //        preventing the button from being pressed twice in a number
+        if lastNumber.contains(".") == false && currentOperator != "=" {
             
-            resultLabel.text = numberOnScreen
-            unblockOperatorButton()
+            if lastNumber == "" {
+                lastNumber = "0."
+                calculationString += lastNumber
+            }
+            else {
+                getLastDigitAndNumber(button: sender)
+            }
+             showCalculation(of: calculationString)
         }
     }
-    
     //    4 operators are connected from the storyboard here: (multiply, devide, plus, minus)
     @IBAction func operatorClicked(_ sender: UIButton){
-        
-        if numberOnScreen.contains(".") == false && currentOperator != "=" {
-            numberOnScreen += ".0"
+       
+        if calculationString != ""  {
+            if currentOperator == ")" {
+//               This is to prevent the next else if function to exceute when ")" was before
+            }
+//                replace the old operator, preventing two operators to be next to each other
+            else if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/" {
+                calculationString.removeLast()
+            }
+            else if currentOperator != "=" {
+               convertToDouble()
+            }
+            currentOperator = "\(sender.currentTitle!)"
+            calculationString += currentOperator
+            showCalculation(of: calculationString)
+            
+            clearText()
         }
-        currentOperator = " \(sender.currentTitle!) "
-        calculationString += numberOnScreen + currentOperator
-        print(calculationString)
-        
-        clearText()
-        
-        blockOperatorButton(block: sender)
-        
-        if previousButton != UIButton() {
-            unblockOperatorButton()
-        }
-        previousButton = sender
+    }
+//    convert the number in the string to Doubles
+    func convertToDouble() {
+
+        removeLastNumber()
+        let convertedNumber = Double(lastNumber)!
+        lastNumber = String(convertedNumber)
+        calculationString += lastNumber
     }
     
-    
     @IBAction func resultButtonClicked(_ sender: UIButton){
-        calculationString += numberOnScreen
-        currentOperator = "="
-        print(calculationString)
-        calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
-        let y = NSExpression(format:calculationString)
-        
-        result = y.expressionValue(with: nil, context: nil) as! Double
-        print(result)
-        resultLabel.text = "\(result)"
-        calculationString = "\(result)"
-        clearText()
-        unblockOperatorButton()
+        let numberOfleftBrackets =  calculationString.components(separatedBy:"(")
+        let numberOfrightBrackets =  calculationString.components(separatedBy:")")
+ //        prevent crashing if there is no number after an operator or if the brackets are put in wrong
+        if lastNumber == "" || (numberOfleftBrackets != numberOfrightBrackets) {
+            resultLabel.text = "Error"
+            clearText()
+            calculationString = ""
+        }
+        else if currentOperator != "=" {
+//            if currentOperator != "%" { convertToDouble() }
+            currentOperator = "="
+           calculateString()
+            
+            addItemToHistory(calculationString: calculationString, resultString: "=\(result)")
+            calculationString += currentOperator
+            calculationString += "\(result)"
+            showCalculation(of: calculationString)
+            //            After calculation there should only be the result in the string
+            calculationString = "\(result)"
+            clearText()
+            
+        }
+    }
+    
+    func calculateString() {
+        //            replacing x to * so it can calculate
+             calculationString = calculationString.replacingOccurrences(of: "x", with: "*")
+             //            change the calculation String to an expression that can be calculated
+             let y = NSExpression(format:calculationString)
+             result = y.expressionValue(with: nil, context: nil) as! Double
+        result = result.rounded(toPlaces: 5)
     }
     
     //    This function is connected to the buttons of number 1 to 9 from the storyboard:
     @IBAction func numberButtonClicked(_ sender: UIButton){
+//        after previous calculation if there was no operator clicked, then when clicking a number
         if currentOperator == "=" {
+//            to start a new calculation
             calculationString = ""
+//            so it does not add additional .0 twice in operator function,
+            currentOperator = ""
         }
-        numberOnScreen += sender.currentTitle!
+        getLastDigitAndNumber(button: sender)
         
-        resultLabel.text = numberOnScreen
-        unblockOperatorButton()
+        showCalculation(of: calculationString)
+
     }
     
-    //    This function clears the text on the Label and enables the decimal BUtton
+    func getLastDigitAndNumber(button: UIButton) {
+        lastDigit = button.currentTitle!
+        lastNumber += lastDigit
+        calculationString += lastDigit
+    }
+    
+    //    This function clears the text on the Label and enables the decimal Button
     func clearText() {
-        numberOnScreen = ""
-        decimalButton.isEnabled = true
+        lastDigit = ""
+        lastNumber = ""
+    }
+// This function is to show the input on the screen without .0
+    func showCalculation(of string: String) {
+        let replaced = string.replacingOccurrences(of: "x", with: "·")
+        var filtered = replaced.replacingOccurrences(
+            of: #"(\.0\b)"#,
+            with: "",
+            options: .regularExpression
+        )
+        filtered = filtered.replacingOccurrences(of: "·", with: "x")
+        filtered = filtered.replacingOccurrences(of: "*", with: "x")
+                
+        resultLabel.text = filtered
+    }
+   //END OF ANITA CODE
+    // Start of Viktors Code
+    
+    @IBAction func Power2(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(pow(value ?? 0, 2))"
+        calculationString = ""
+        //This was done before felix decided to make the history that depends on the Calculation string
+        calculationString += lastNumber
+        resultLabel.text = calculationString
     }
     
-    //    empty Button
-    var previousButton = UIButton()
-    //    This function should block operator from being executed twice unnessasarily:
-    //    Maybe we should change the background color when its blocked..?
-    func blockOperatorButton(block button: UIButton) {
-        button.isEnabled = false
+    @IBAction func RightBracket(_ sender: SideDrawerButton) {
+        // originally the function did not work due to the equals sign programming. We then had to work on this together with anita, for several hours. It is now able to read the brackets as both the operator and the operand/
+            calculationString += ")"
+                currentOperator = ")"
+           resultLabel.text = calculationString
+        
     }
-    func unblockOperatorButton() {
-        previousButton.isEnabled = true
+    // so far I've developed a switch for the lasNumber/currentOpperator. However, due to remove last operand func, the bracket can only be processed as a number
+    @IBAction func LeftBracket(_ sender: SideDrawerButton) {
+        
+        // this was a try for one of the solutions, which was a switch function
+        //     switch currentOperator {
+     //   case "*":
+       //     currentOperator = "*("
+        //case "/":
+          //  currentOperator = "/("
+        //case "-":
+         //   currentOperator = "-("
+        //case "+":
+         //   currentOperator = "+("
+        //case "(":
+         //   currentOperator = "(("
+        //case "":
+         //   currentOperator = "("
+        //default:
+          //  currentOperator = "Error"
+        // }"
+        calculationString += "("
+        currentOperator = "("
+        resultLabel.text = calculationString
     }
+    
+    
+    @IBAction func RandomNumberGen(_ sender: SideDrawerButton) {
+    switch lastDigit // because its based on the last digit of a number, it doesnt matter what you type in, it wont crash, this is used to ensure that incorrect users input wont cause any defects
+        {
+        case "0":
+            calculationString = "\(drand48())"
+            // randomized a number between 0 and 1, with a limited number of signifcant figures
+            // next fucntion randomize the number based on the upper limit, and the lower limit, is alway the lowest value within the same number of figures as the upper limit
+            // I've orginally done this function with an if else statement, but then was asked to redo it in a "switch" based mode.
+        case "1":
+    calculationString = "\(Double(arc4random_uniform(10)))"
+        case "2":
+    calculationString = "\(Double(arc4random_uniform(100)))"
+        case "3":
+    calculationString = "\(Double(arc4random_uniform(1000)))"
+        case "4":
+    calculationString = "\(Double(arc4random_uniform(10000)))"
+        case "5":
+    calculationString = "\(Double(arc4random_uniform(100000)))"
+        case "6":
+    calculationString = "\(Double(arc4random_uniform(1000000)))"
+        case "7":
+    calculationString = "\(Double(arc4random_uniform(10000000)))"
+        case "8":
+    calculationString = "\(Double(arc4random_uniform(100000000)))"
+        case "9":
+    calculationString = "\(Double(arc4random_uniform(1000000000)))"
+        // this is the basic out of the function, after the user presses the function buttons (the output on the label view)
+        default:
+            calculationString = "Choose Number of Figures"
+        }
+        resultLabel.text = calculationString
+    
+    }
+    // this is a function, that is referred in the actuall factorial button event
+    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because uInt has a maximum output value and 21 input breaks it
+        // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
+        // we set the result here, once again the factorial has to always be greater than 0
+        // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
+        if 0 > number || number > 15{
+            return number
+    } else if number == 0 {
+        return 1
+        } else {
+    // the function must then perform the factorial multiplication
+            return number*factorial(number: number - 1)
+        }
+    }
+    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives. This is not going to be implemented in this version of the app, but rather in v.2
+    func powerFunction(value: Double, power: Double) -> Double {
+        return pow(value, power)
+    }
+    //log base 2 function (once again works only on the last number you entered to prevent mistaken input, and hence errors
+    @IBAction func LogBase2(_ sender: Any) {
+    let value = Double(lastNumber)
+        lastNumber = "\(logBase2(valueOfLog: value ?? 0))"
+    calculationString = ""
+    calculationString += lastNumber
+    resultLabel.text = calculationString
+    }
+    //log base 10 function
+    @IBAction func LogBase10(_ sender: SideDrawerButton) {
+               let value = Double(lastNumber)
+        // the ?? 0 is because when it converts from type string, into type double, it ensures that if there is no numbers, it has a value, 0, to use as default
+        lastNumber = "\(logBase10(valueOfLog: value ?? 0))"
+               calculationString = ""
+               calculationString += lastNumber
+               resultLabel.text = calculationString
+        
+    }
+    // square root function (once again only takes the sqrt of the last number)
+    @IBAction func SquareRoot(_ sender: SideDrawerButton) {
+          let value = Double(lastNumber)
+          lastNumber = "\(sqrt(value ?? 0))"
+        //it deletes all the information in the string before, and outputs your answer, to avoid clattering
+        // i've considered replacing the last number with the result of this function, but in my view that just makes it to comples, as you dont always know whether you've done an error or not
+        calculationString = ""
+          calculationString += lastNumber
+          resultLabel.text = calculationString
+    }
+    
+    func squareRoot(valueToBeSquareRooted: Double) -> Double {
+        return sqrt(valueToBeSquareRooted)
+    }
+   
+    
+    @IBAction func Factorial(_ sender: SideDrawerButton) {
+    // where "number" setting has to be in  0 <= x <= 20, because UInt has a maximum output value and 21 input breaks it
+        // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
+        // we set the result here, once again the factorial has to always be greater than 0
+        // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
+        let number = Int(lastNumber)
+        if 0 > (number ?? -1) || (number ?? 16) > 15 {
+            lastNumber = ""
+                } else if (number ?? 0) == 0 {
+            lastNumber = "1"
+                } else {
+            lastNumber = "\((number ?? 2)*factorial(number: (number ?? 2) - 1))"
+    // the function must then perform the factorial multiplication
+            }
+        calculationString = lastNumber
+        resultLabel.text = calculationString
+    }
+    // a simple input of the e number
+    @IBAction func Eyuler(_ sender: SideDrawerButton) {
+        lastNumber = "\(e)"
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    // sin function
+    @IBAction func Sin(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(sin(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    // cos function
+    @IBAction func Cosine(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(cos(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+    }
+    
+    // tan fucntion, it conver the optional "value" type string into a type double, otherwise the function wouldnt be possible
+    @IBAction func Tangent(_ sender: SideDrawerButton) {
+        let value = Double(lastNumber)
+        lastNumber = "\(tan(value ?? 0))"
+        calculationString = ""
+        calculationString += lastNumber
+        resultLabel.text = calculationString
+}
+
+
+    //establishing e (natural num.)
+    let e = 2.1718281828459047
+    
+    // function for finding the logBase 10
+    func logBase10(valueOfLog: Double) -> Double {
+        return log(valueOfLog)
+    }
+    // function for finding the logBase 2
+    func logBase2(valueOfLog: Double) -> Double {
+        return log2(valueOfLog)
+    }
+
+    
+    //End of Viktors Code
+    
+    
+    
+    
+    
+    
+    //FELIX CODE START
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the
         
         //rounding the bottom corners of the top card view
         topCardView.roundCorners(cornerRadius: 40)
         topCardView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        //rounding top right corner of the side drawer menu
+        sideDrawer.roundCorners(cornerRadius: 40)
+        sideDrawer.layer.maskedCorners = [.layerMaxXMinYCorner]
         
         //adding pan gesture recognizer to top area
         let topAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(topAreaDragged(_:)))
@@ -202,6 +537,7 @@ class ViewController: UIViewController {
         topAreaDrag.delaysTouchesBegan = false
         topAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to top area
         self.topCardView.addGestureRecognizer(topAreaDrag)
         
         //adding screen edge pan gesture recognizer to side drawer
@@ -210,22 +546,28 @@ class ViewController: UIViewController {
         sideAreaScreenEdgeDrag.delaysTouchesBegan = false
         sideAreaScreenEdgeDrag.delaysTouchesEnded = false
         sideAreaScreenEdgeDrag.edges = .left
+        
         //adding pan gesture recognizer to side drawer
         let sideAreaDrag = UIPanGestureRecognizer(target: self, action: #selector(sideDrawerDragged(_:)))
         //disabling delays of recognition
         sideAreaDrag.delaysTouchesBegan = false
         sideAreaDrag.delaysTouchesEnded = false
         
+        //adding gestureRecognizer to main and side view
         self.view.addGestureRecognizer(sideAreaScreenEdgeDrag)
         self.sideDrawer.addGestureRecognizer(sideAreaDrag)
-
+        
         
         //calculating the amount of points the constraint is able to have max
         maxDraggablePointsTopArea = (CGFloat(view.frame.size.height) * 0.61 - (CGFloat(view.frame.size.height) * 0.15)) * -1
         
         //calculating the amount of points the constraint is able to have max
-        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.7) * -1
+        maxDraggablePointsSideDrawer = (CGFloat(view.frame.size.width) * 0.72) * -1
         
+        //setting size of leading constraint for sideDrawer
+        sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer
+        
+        historyTable.transform = CGAffineTransform(rotationAngle: -.pi);
     }
     
     @IBAction func topAreaDragged(_ panRecognizer: UIPanGestureRecognizer){
@@ -233,7 +575,7 @@ class ViewController: UIViewController {
         
         switch panRecognizer.state {
         case .began:
-            //saving current value
+            //saving current state of constraint
             topAreaBottomContraintVal = topAreaBottomConstraint.constant
             
         case .changed:
@@ -241,35 +583,60 @@ class ViewController: UIViewController {
             if newValue > maxDraggablePointsTopArea && newValue < 0 {
                 self.topAreaBottomConstraint.constant = newValue
                 self.view.layoutIfNeeded()
+                
+                //fold sideDrawer back if expanded
+                if sideDrawerState == .expanded{
+                    sideDrawerToCollapsed()
+                }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //top area is in the lower half
                 if self.topAreaBottomConstraint.constant < maxDraggablePointsTopArea / 2 {
+                    //velocity of drag is high enough for bounce
                     if panRecognizer.velocity(in: self.view).y > 1500{
-                        changeTopCardViewHeightWithBunce(to: maxDraggablePointsTopArea)
+                        topAreaToExpanded(withBounce: true)
+                        //animate top area down without bounce, due to low velocity
                     }else {
-                        changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
-                        topAreaState = .expanded
+                        topAreaToExpanded(withBounce: false)
                     }
+                    //top area has not been dragged down far enough, animate back up
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: 0)
+                    topAreaToCollapsed()
                 }
                 
             case .expanded:
+                //top area is in the top half when let go of drag
                 if self.topAreaBottomConstraint.constant > maxDraggablePointsTopArea / 2 {
-                    changeTopCardViewHeightWithAnimation(to: 0)
-                    self.view.layoutIfNeeded()
-                    topAreaState = .normal
+                    topAreaToCollapsed()
+                    //top area is in lower half when let go of drag and gets back to expanded position
                 } else {
-                    changeTopCardViewHeightWithAnimation(to: maxDraggablePointsTopArea)
+                    topAreaToExpanded(withBounce: false)
                 }
             }
             
         default:
             break
         }
+    }
+    
+    //moving top area back in
+    func topAreaToCollapsed(){
+        changeConstraintWithAnimation(of: topAreaBottomConstraint, to: 0)
+        topAreaState = .normal
+    }
+    
+    //expanding top area with or without bounce animation
+    func topAreaToExpanded(withBounce: Bool){
+        if withBounce {
+            changeConstraintValueWithBounce(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+        }else{
+            changeConstraintWithAnimation(of: topAreaBottomConstraint, to: maxDraggablePointsTopArea)
+            
+        }
+        topAreaState = .expanded
     }
     
     
@@ -285,30 +652,39 @@ class ViewController: UIViewController {
             let newValue = self.sideDrawerTrailingConstraintVal - translation.x
             if newValue > maxDraggablePointsSideDrawer && newValue < 0 {
                 self.sideDrawerTrailingConstraint.constant = newValue
+                self.sideDrawerLeadingConstraint.constant = maxDraggablePointsSideDrawer + -1 * newValue
                 self.view.layoutIfNeeded()
+                
+                //fold topArea back if extended
+                if topAreaState == .expanded{
+                    topAreaToCollapsed()
+                }
             }
             
         case .ended:
             switch topAreaState{
             case .normal:
+                //is the side area let go of whilst being in the right half of screen?
                 if self.sideDrawerTrailingConstraint.constant < maxDraggablePointsSideDrawer / 2 {
-                    if panRecognizer.velocity(in: self.view).x > 1500{
-                        changeSideDrawerWidthWithBunce(to: maxDraggablePointsSideDrawer)
+                    //is the velocity of the drag gesture high enough for bounce animation?
+                    if panRecognizer.velocity(in: self.view).x > 1000{
+                        sideDrawerToExpanded(withBounce: true)
+                        //if not, just animate the side area into the expanded position without bounce
                     }else {
-                        changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
-                        sideDrawerState = .expanded
+                        sideDrawerToExpanded(withBounce: false)
                     }
+                    //side area is not let go of in the right half, so just animate it back up
                 } else {
-                    changesideDrawerWidthWithAnimation(to: 0)
+                    sideDrawerToCollapsed()
                 }
                 
             case .expanded:
+                //is swiped back far enough to animate side area back to collapsed state
                 if self.sideDrawerTrailingConstraint.constant > maxDraggablePointsSideDrawer / 2 {
-                    changeTopCardViewHeightWithAnimation(to: 0)
-                    self.view.layoutIfNeeded()
-                    sideDrawerState = .normal
+                    sideDrawerToCollapsed()
+                    //drag is not far enough, so animate side area back out
                 } else {
-                    changesideDrawerWidthWithAnimation(to: maxDraggablePointsSideDrawer)
+                    sideDrawerToExpanded(withBounce: false)
                 }
             }
             
@@ -317,44 +693,42 @@ class ViewController: UIViewController {
         }
     }
     
+    //animates the top area to its collapsed state
+    func sideDrawerToCollapsed(){
+        changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: 0)
+        changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: maxDraggablePointsSideDrawer)
+        sideDrawerState = .normal
+    }
     
-    func changeTopCardViewHeightWithAnimation(to: CGFloat){
+    //expands the top area eventually with a bounce
+    func sideDrawerToExpanded(withBounce: Bool){
+        if withBounce{
+            self.sideDrawerLeadingConstraint.constant = 0
+            self.view.layoutIfNeeded()
+            changeConstraintValueWithBounce(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+        }else{
+            changeConstraintWithAnimation(of: sideDrawerTrailingConstraint, to: maxDraggablePointsSideDrawer)
+            changeConstraintWithAnimation(of: sideDrawerLeadingConstraint, to: 0)
+        }
+        sideDrawerState = .expanded
+    }
+    
+    
+    func changeConstraintWithAnimation(of: NSLayoutConstraint, to: CGFloat){
         UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-            self.topAreaBottomConstraint.constant = to
+            of.constant = to
             self.view.layoutIfNeeded()
         }).startAnimation()
     }
     
-    func changesideDrawerWidthWithAnimation(to: CGFloat){
-        UIViewPropertyAnimator(duration: 0.2, curve: .easeOut, animations: {
-            self.sideDrawerTrailingConstraint.constant = to
-            self.view.layoutIfNeeded()
-        }).startAnimation()
-    }
-    
-    
-    
-    
-    func changeTopCardViewHeightWithBunce(to: CGFloat){
-        UIView.animate(withDuration: 0.6, //1
+    func changeConstraintValueWithBounce(of: NSLayoutConstraint, to: CGFloat){
+        UIView.animate(withDuration: 0.4, //1
             delay: 0.0, //2
             usingSpringWithDamping: 0.3, //3
             initialSpringVelocity: 1, //4
             options: UIView.AnimationOptions.curveEaseInOut, //5
             animations: ({ //6
-                self.topAreaBottomConstraint.constant = to
-                self.view.layoutIfNeeded()
-            }), completion: nil)
-    }
-    
-    func changeSideDrawerWidthWithBunce(to: CGFloat){
-        UIView.animate(withDuration: 0.6, //1
-            delay: 0.0, //2
-            usingSpringWithDamping: 0.3, //3
-            initialSpringVelocity: 1, //4
-            options: UIView.AnimationOptions.curveEaseInOut, //5
-            animations: ({ //6
-                self.sideDrawerTrailingConstraint.constant = to
+                of.constant = to
                 self.view.layoutIfNeeded()
             }), completion: nil)
     }
@@ -369,8 +743,39 @@ extension UIView {
     
 }
 
-extension NSLayoutConstraint {
-    func constraintWithMultiplier(_ multiplier: CGFloat) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
+extension ViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    //returning amount of rows needed
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return history.count
+    }
+    
+    //returning table cell to display
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let historyCell = historyTable.dequeueReusableCell(withIdentifier: "CalculationHistoryCell") as! CalculationHistoryCell
+        
+        historyCell.setText(calculation: history[indexPath.row]);
+        historyCell.transform = CGAffineTransform(rotationAngle: .pi);
+        
+        return historyCell
     }
 }
+
+//END FELIX CODE
+
+
+
+
+
+//START OF ANITA CODE
+//This extemsion is to be able to round numbers 
+extension Double {
+       func rounded(toPlaces places:Int) -> Double {
+           let divisor = pow(10.0, Double(places))
+           return (self * divisor).rounded() / divisor
+       }
+   }
+//END OF ANITA CODE
+
+
