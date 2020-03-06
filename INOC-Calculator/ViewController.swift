@@ -304,17 +304,19 @@ class ViewController: UIViewController {
         resultLabel.text = filtered
     }
    //END OF ANITA CODE
+    // Start of Viktors Code
     
     @IBAction func Power2(_ sender: SideDrawerButton) {
         let value = Double(lastNumber)
         lastNumber = "\(pow(value ?? 0, 2))"
         calculationString = ""
+        //This was done before felix decided to make the history that depends on the Calculation string
         calculationString += lastNumber
         resultLabel.text = calculationString
     }
     
     @IBAction func RightBracket(_ sender: SideDrawerButton) {
-            
+        // originally the function did not work due to the equals sign programming. We then had to work on this together with anita, for several hours. It is now able to read the brackets as both the operator and the operand/
             calculationString += ")"
                 currentOperator = ")"
            resultLabel.text = calculationString
@@ -323,7 +325,7 @@ class ViewController: UIViewController {
     // so far I've developed a switch for the lasNumber/currentOpperator. However, due to remove last operand func, the bracket can only be processed as a number
     @IBAction func LeftBracket(_ sender: SideDrawerButton) {
         
-           
+        // this was a try for one of the solutions, which was a switch function
         //     switch currentOperator {
      //   case "*":
        //     currentOperator = "*("
@@ -347,7 +349,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func RandomNumberGen(_ sender: SideDrawerButton) {
-    switch lastDigit // because its based on the last digit of a number, it doesnt matter what you type in, it wont crash
+    switch lastDigit // because its based on the last digit of a number, it doesnt matter what you type in, it wont crash, this is used to ensure that incorrect users input wont cause any defects
         {
         case "0":
             calculationString = "\(drand48())"
@@ -379,8 +381,8 @@ class ViewController: UIViewController {
         resultLabel.text = calculationString
     
     }
-    // this is a function, that is referred in the actuall factorial butto event
-    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because UInt has a maximum output value and 21 input breaks it
+    // this is a function, that is referred in the actuall factorial button event
+    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because uInt has a maximum output value and 21 input breaks it
         // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
         // we set the result here, once again the factorial has to always be greater than 0
         // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
@@ -393,7 +395,7 @@ class ViewController: UIViewController {
             return number*factorial(number: number - 1)
         }
     }
-    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives
+    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives. This is not going to be implemented in this version of the app, but rather in v.2
     func powerFunction(value: Double, power: Double) -> Double {
         return pow(value, power)
     }
@@ -408,6 +410,7 @@ class ViewController: UIViewController {
     //log base 10 function
     @IBAction func LogBase10(_ sender: SideDrawerButton) {
                let value = Double(lastNumber)
+        // the ?? 0 is because when it converts from type string, into type double, it ensures that if there is no numbers, it has a value, 0, to use as default
         lastNumber = "\(logBase10(valueOfLog: value ?? 0))"
                calculationString = ""
                calculationString += lastNumber
@@ -497,7 +500,7 @@ class ViewController: UIViewController {
     
     
     
-    
+    //End of Viktors Code
     //FELIX CODE START
     
     
