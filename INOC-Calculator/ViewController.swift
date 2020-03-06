@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     //END OF FELIX CODE
     
     
-    
+    //START OF ANITA CODE
     
 //    last digit that was pressed
     var lastDigit = ""
@@ -83,8 +83,6 @@ class ViewController: UIViewController {
     var currentOperator = ""
     
     var calculationString = ""
-    
-    var previousCalculation = ""
     
     var result = 0.0
 //    the number that should be toggled with positive or negative sign
@@ -112,8 +110,8 @@ class ViewController: UIViewController {
             if lastNumber == "" {
             lastNumber = calculationString
         }
+//              remove the last number, change the sign of the number and put it back
             removeLastNumber()
-//            change the sign of the number and put it back
             toggledNumber = String(Double(-1) * Double(lastNumber)!)
             lastNumber = toggledNumber
             calculationString += lastNumber
@@ -129,6 +127,7 @@ class ViewController: UIViewController {
                         calculationString.removeLast()
                     }
     }
+    //END OF ANITA CODE
     
     //START FELIX CODE
     
@@ -149,8 +148,10 @@ class ViewController: UIViewController {
     
     //END FELIX CODE
     
+    //START OF ANITA CODE
+    
     @IBAction func percentageButtonClicked(_ sender: UIButton){
-
+//          If there is only one number to calculate it should be just devided by 100
             if calculationString != "" {
                 if currentOperator == "=" || currentOperator == "" {
                     calculationString = String(Double(calculationString)! / 100)
@@ -159,20 +160,20 @@ class ViewController: UIViewController {
                 else if currentOperator != "" {
                     convertToDouble()
                      showCalculation(of: calculationString + "%")
-
+//              remove last number and operator to calculate it into % and then put it back in the string
                     removeLastNumber()
                     calculationString.removeLast()
                      calculateString()
                      let percentage = result * Double(lastNumber)! / 100
                      calculationString += currentOperator
                     calculationString += String(percentage)
-                    print("S \(calculationString)")
                      currentOperator = "%"
                  }
         }
     }
     
     @IBAction func numberZeroButtonClicked(_ sender: UIButton){
+//        if there was a finished calculation then the string will be reset
         if currentOperator == "=" {
             calculationString = ""
             currentOperator = ""
@@ -204,8 +205,9 @@ class ViewController: UIViewController {
        
         if calculationString != ""  {
             if currentOperator == ")" {
-               
+//               This is to prevent the next else if function to exceute when ")" was before
             }
+//                replace the old operator, preventing two operators to be next to each other
             else if calculationString.last! == "+" || calculationString.last! == "-" || calculationString.last! == "x" || calculationString.last! == "/" {
                 calculationString.removeLast()
             }
@@ -214,13 +216,12 @@ class ViewController: UIViewController {
             }
             currentOperator = "\(sender.currentTitle!)"
             calculationString += currentOperator
-            print(calculationString)
             showCalculation(of: calculationString)
             
             clearText()
-            
         }
     }
+//    convert the number in the string to Doubles
     func convertToDouble() {
 
         removeLastNumber()
@@ -230,9 +231,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButtonClicked(_ sender: UIButton){
-        //        prevent crashing if there is no number after an operator
-        
-        if lastNumber == "" {
+        let numberOfleftBrackets =  calculationString.components(separatedBy:"(")
+        let numberOfrightBrackets =  calculationString.components(separatedBy:")")
+ //        prevent crashing if there is no number after an operator or if the brackets are put in wrong
+        if lastNumber == "" || (numberOfleftBrackets != numberOfrightBrackets) {
             resultLabel.text = "Error"
             clearText()
             calculationString = ""
@@ -241,11 +243,11 @@ class ViewController: UIViewController {
 //            if currentOperator != "%" { convertToDouble() }
             currentOperator = "="
            calculateString()
+            
+            addItemToHistory(calculationString: calculationString, resultString: "=\(result)")
             calculationString += currentOperator
             calculationString += "\(result)"
             showCalculation(of: calculationString)
-            //        to store the calculation String for the History before it will be deleted:
-            previousCalculation = calculationString
             //            After calculation there should only be the result in the string
             calculationString = "\(result)"
             clearText()
@@ -283,12 +285,12 @@ class ViewController: UIViewController {
         calculationString += lastDigit
     }
     
-    //    This function clears the text on the Label and enables the decimal BUtton
+    //    This function clears the text on the Label and enables the decimal Button
     func clearText() {
         lastDigit = ""
         lastNumber = ""
     }
-
+// This function is to show the input on the screen without .0
     func showCalculation(of string: String) {
         let replaced = string.replacingOccurrences(of: "x", with: "·")
         var filtered = replaced.replacingOccurrences(
@@ -301,18 +303,20 @@ class ViewController: UIViewController {
                 
         resultLabel.text = filtered
     }
-   
+   //END OF ANITA CODE
+    // Start of Viktors Code
     
     @IBAction func Power2(_ sender: SideDrawerButton) {
         let value = Double(lastNumber)
         lastNumber = "\(pow(value ?? 0, 2))"
         calculationString = ""
+        //This was done before felix decided to make the history that depends on the Calculation string
         calculationString += lastNumber
         resultLabel.text = calculationString
     }
     
     @IBAction func RightBracket(_ sender: SideDrawerButton) {
-            
+        // originally the function did not work due to the equals sign programming. We then had to work on this together with anita, for several hours. It is now able to read the brackets as both the operator and the operand/
             calculationString += ")"
                 currentOperator = ")"
            resultLabel.text = calculationString
@@ -321,7 +325,7 @@ class ViewController: UIViewController {
     // so far I've developed a switch for the lasNumber/currentOpperator. However, due to remove last operand func, the bracket can only be processed as a number
     @IBAction func LeftBracket(_ sender: SideDrawerButton) {
         
-           
+        // this was a try for one of the solutions, which was a switch function
         //     switch currentOperator {
      //   case "*":
        //     currentOperator = "*("
@@ -345,7 +349,8 @@ class ViewController: UIViewController {
     
     
     @IBAction func RandomNumberGen(_ sender: SideDrawerButton) {
-    switch lastDigit {
+    switch lastDigit // because its based on the last digit of a number, it doesnt matter what you type in, it wont crash, this is used to ensure that incorrect users input wont cause any defects
+        {
         case "0":
             calculationString = "\(drand48())"
             // randomized a number between 0 and 1, with a limited number of signifcant figures
@@ -376,8 +381,8 @@ class ViewController: UIViewController {
         resultLabel.text = calculationString
     
     }
-    // this is a function, that is referred in the actuall factorial butto event
-    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because UInt has a maximum output value and 21 input breaks it
+    // this is a function, that is referred in the actuall factorial button event
+    func factorial(number: Int) -> Int { // where "number" setting has to be in  0 <= x <= 20, because uInt has a maximum output value and 21 input breaks it
         // I changed it from UInt to Int, and although it doesnt have the limitation for INT, we can set an internal comand to stop it at a certain result
         // we set the result here, once again the factorial has to always be greater than 0
         // also to make sure that the amoount of figures isnt higher than the maimum permited for our application, we have to set a max boundary of 15
@@ -390,11 +395,11 @@ class ViewController: UIViewController {
             return number*factorial(number: number - 1)
         }
     }
-    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives
+    //This is the power Function, it gives the answer based on the give base (the Value parameter) and the given power( the power parameter) (it uses the pow call. Works with both, negatives and positives. This is not going to be implemented in this version of the app, but rather in v.2
     func powerFunction(value: Double, power: Double) -> Double {
         return pow(value, power)
     }
-    
+    //log base 2 function (once again works only on the last number you entered to prevent mistaken input, and hence errors
     @IBAction func LogBase2(_ sender: Any) {
     let value = Double(lastNumber)
         lastNumber = "\(logBase2(valueOfLog: value ?? 0))"
@@ -402,20 +407,23 @@ class ViewController: UIViewController {
     calculationString += lastNumber
     resultLabel.text = calculationString
     }
-    
+    //log base 10 function
     @IBAction func LogBase10(_ sender: SideDrawerButton) {
                let value = Double(lastNumber)
+        // the ?? 0 is because when it converts from type string, into type double, it ensures that if there is no numbers, it has a value, 0, to use as default
         lastNumber = "\(logBase10(valueOfLog: value ?? 0))"
                calculationString = ""
                calculationString += lastNumber
                resultLabel.text = calculationString
         
     }
-    
+    // square root function (once again only takes the sqrt of the last number)
     @IBAction func SquareRoot(_ sender: SideDrawerButton) {
           let value = Double(lastNumber)
           lastNumber = "\(sqrt(value ?? 0))"
-          calculationString = ""
+        //it deletes all the information in the string before, and outputs your answer, to avoid clattering
+        // i've considered replacing the last number with the result of this function, but in my view that just makes it to comples, as you dont always know whether you've done an error or not
+        calculationString = ""
           calculationString += lastNumber
           resultLabel.text = calculationString
     }
@@ -492,7 +500,7 @@ class ViewController: UIViewController {
     
     
     
-    
+    //End of Viktors Code
     //FELIX CODE START
     
     
@@ -743,13 +751,17 @@ extension NSLayoutConstraint {
         return NSLayoutConstraint(item: self.firstItem!, attribute: self.firstAttribute, relatedBy: self.relation, toItem: self.secondItem, attribute: self.secondAttribute, multiplier: multiplier, constant: self.constant)
     }
 }
+
+//END FELIX CODE
+
+//START OF ANITA CODE
+//This extemsion is to be able to round numbers 
 extension Double {
        func rounded(toPlaces places:Int) -> Double {
            let divisor = pow(10.0, Double(places))
            return (self * divisor).rounded() / divisor
        }
    }
+//END OF ANITA CODE
 
 
-
-//END FELIX CODE
