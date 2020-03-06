@@ -106,7 +106,7 @@ class ViewController: UIViewController {
     
     @IBAction func toggleSignButtonClicked(_ sender: Any){
 //        the function should not execute if there is no number (when first open the app or after clearing)
-        if lastNumber != "" || calculationString != "" {
+        if calculationString != "" {
             if lastNumber == "" {
             lastNumber = calculationString
         }
